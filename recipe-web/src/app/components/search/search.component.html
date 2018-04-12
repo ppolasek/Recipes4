@@ -18,8 +18,8 @@
            placeholder="Search by tags..."
            style="width: 180px;"
            (input)="onTagInput(recipeTagList.value)">
-    <div *ngFor="let temptag of recipeTags" style="display: inline-block;">
-      <app-recipe-tag [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>
+    <div *ngFor="let temptag of recipeTags" class="tag-list">
+      <app-recipe-tag class="recipe-tag" [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>
     </div>
   </div>
   <datalist id="searchTaglist">

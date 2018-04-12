@@ -11,6 +11,8 @@
 }
 
 .recipe-content {
+  display: flex;
+  flex: 1;
   margin: 1px 5px;
   align-items: center;
 }

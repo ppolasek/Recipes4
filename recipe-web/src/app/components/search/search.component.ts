@@ -5,10 +5,11 @@ import { timer } from "rxjs/observable/timer";
 import { SelectorDirective } from "../selector-directive";
 import { WebLoggerService } from "../../services/logger_service";
 import { WebRecipeService } from "../../services/recipe_service";
-import { tap } from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, tap} from "rxjs/operators";
 import {Recipe, RecipeTag, RecipeTagEventType, SearchCriteria} from "../../models/recipe_model";
 import {RecipeTagEvent} from "../recipe-tag/recipe-tag-event";
 import { RecipeUtil } from "../../util/recipe_util";
+import {Subject} from "rxjs/Subject";
 
 @Component({
   selector: 'app-search',
@@ -31,6 +32,9 @@ export class SearchComponent implements OnInit {
   private timer: any = timer(1000, 1000);
   private criteria: SearchCriteria = new SearchCriteria();
 
+  private searchTerms = new Subject<string>();
+
+
   constructor(
     private loggerService: WebLoggerService,
     private recipeService: WebRecipeService,
@@ -41,6 +45,27 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.loadRecipeTags();
+
+    // this.searchTerms.pipe(
+    //   debounceTime(500),
+    //
+    //   distinctUntilChanged(),
+    //
+    //   do((term: string) => this.doSearch()),
+    // );
+/*
+    this.heroes$ = this.searchTerms.pipe(
+      // wait 300 ms after each keystroke before considering the search term
+      debounceTime(300),
+
+      // ignore new term if same as the previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.heroService.searchHeroes(term)),
+    );
+
+ */
   }
 
   onRecipeHovered(event) {
@@ -55,10 +80,12 @@ export class SearchComponent implements OnInit {
   }
 
   onKey(value: string) {
-    // TODO searchText = value;
-    // this.logger.fine('onKey() value = $value, searchText = $searchText');
-    //
-    // if (value != null && value.isNotEmpty) {
+    this.searchText = value;
+    this.logger.fine('onKey() value = ' + value + ', searchText = ' + this.searchText);
+
+    this.searchTerms.next(value);
+
+    // if (value != null && value.length > 0) {
     //   // perform a search on the text after a half-second delay
     //   if (_timer != null && _timer.isActive) {
     //     _timer.cancel();
@@ -125,19 +152,25 @@ export class SearchComponent implements OnInit {
   private doSearch() {
     this.logger.fine('doSearch()');
 
-    // TODO _criteria.searchText = searchText;
-    // _criteria.tags = recipeTags;
-    // this.logger.fine('_doSearch() _criteria = $_criteria');
-    //
-    // // if there's no search criteria then skip the search
-    // if (_criteria.isValid) {
-    //   _recipeService.recipeSearch(_criteria)
-    //       .then((list) => recipes = list);
-    //
-    //   this.logger.fine('_doSearch() recipes.length = ${recipes.length}');
-    // } else {
-    //   recipes = <Recipe>[];
-    // }
+    this.criteria.searchText = this.searchText;
+    this.criteria.tags = this.recipeTags;
+    this.logger.fine('_doSearch() _criteria = $_criteria');
+
+    /*
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.heroService.getHero(id).subscribe(hero => this.hero = hero);
+
+     */
+
+    // if there's no search criteria then skip the search
+    if (this.criteria.isValid()) {
+      this.recipeService.recipeSearch(this.criteria)
+        .subscribe(list => this.recipes = list);
+
+      this.logger.fine('_doSearch() recipes.length = ' + this.recipes.length);
+    } else {
+      this.recipes = [];
+    }
   }
 
   private loadRecipeTags() {

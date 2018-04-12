@@ -94,6 +94,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.logger.finer('_showHoveredRecipe() _hoveredRecipe = ' + this.selector.hoveredRecipe);
     this.selector.subscription.unsubscribe();
 
+    this.logger.finer('_showHoveredRecipe() this.enableHoverEvent = ' + this.enableHoverEvent);
     if (this.enableHoverEvent) {
       // not navigating to the hover page, but showing it below the list
       // recipeHovered.emit({...this.this.selector.hoveredRecipe});

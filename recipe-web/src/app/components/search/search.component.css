@@ -40,3 +40,12 @@ h4 {
 .search-field {
   margin: 5px;
 }
+
+.tag-list {
+  padding-top: 5px;
+  display: inline-block;
+}
+
+.recipe-tag {
+  margin-right: 5px;
+}

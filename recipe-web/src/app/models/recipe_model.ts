@@ -155,7 +155,7 @@ export class RecipeTag extends DomainCommon {
 export class SearchCriteria {
   searchText: string = '';
   tags: Array<RecipeTag> = [];
-  cookbookIds: Array<number>;
+  cookbookIds: Array<number> = [];
 
   // SearchCriteria({searchText: '', tags: const <RecipeTag>[], cookbookId: -1});
 
