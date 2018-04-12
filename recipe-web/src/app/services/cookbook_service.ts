@@ -1,0 +1,71 @@
+// Copyright (c) 2018, ppolasek. All rights reserved. Use of this source code
+// is governed by a BSD-style license that can be found in the LICENSE file.
+
+// import 'dart:async';
+// import 'package:angular/angular.dart';
+// import 'package:http/browser_client.dart';
+//
+// import 'package:recipe_web/src/logger/logger.ts';
+// import 'package:recipe_web/src/common/model.ts';
+// import 'package:recipe_web/src/common/common_services.ts';
+import {WebService} from "./common_services";
+import {Injectable} from "@angular/core";
+import {Recipes4Logger} from "../components/logger/logger";
+import {HttpClient} from "@angular/common/http";
+import {Recipes4AppConfig} from "../models/model";
+import {Cookbook} from "../models/cookbook_model";
+import {Observable} from "rxjs/Observable";
+import {catchError, map, tap} from "rxjs/operators";
+import {WebLoggerService} from "./logger_service";
+
+/// CookbookService interface definition
+///
+export interface CookbookService {
+
+  getAllCookbooks(): Observable<Array<Cookbook>>;
+
+  // TODO implement these
+  // Future<Cookbook> getCookbookById(int cookbookId) => new Future(() => null);
+  // Future<Cookbook> saveCookbook(Cookbook cookbookId) => new Future(() => null);
+  // Future<Cookbook> createCookbook(Cookbook cookbookId) => new Future(() => null);
+  // Future<bool> deleteCookbook(int cookbookId) => new Future(() => null);
+}
+
+/// CookbookService implementation
+///
+@Injectable()
+export class WebCookbookService extends WebService implements CookbookService {
+  private mylog: Recipes4Logger = new Recipes4Logger(this.loggerService, 'WebCookbookService');
+
+  constructor(protected loggerService: WebLoggerService, http: HttpClient, config: Recipes4AppConfig) {
+    super(loggerService, http, config);
+    // super(this.log, this.http, this.config);
+  }
+
+  getAllCookbooks(): Observable<Array<Cookbook>> {
+    return this.makeTheCall('getAllCookbooks', null)
+      .pipe(
+        tap(response => {
+          this.mylog.fine(`getAllCookbooks() response = ${response.value}`);
+        }),
+        map(response => {
+          let returnList: Array<Cookbook> = Cookbook.fromList(response.value);
+          this.mylog.fine(`getAllCookbooks() returnList = ${returnList}`);
+          return returnList;
+        }),
+        catchError(this.handleError<Array<Cookbook>>('getAllCookbooks()'))
+      );
+  }
+
+  // @override
+  // Future<Cookbook> getCookbookById(int cookbookId) => new Future(() => null);
+  //
+  // @override
+  // Future<Cookbook> saveCookbook(Cookbook cookbookId) => new Future(() => null);
+  //
+  // @override
+  // Future<Cookbook> createCookbook(Cookbook cookbookId) => new Future(() => null);
+  //
+  // @override
+  // Future<bool> deleteCookbook(int cookbookId) => new Future(() => true);
+}

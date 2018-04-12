@@ -1,0 +1,42 @@
+/*
+ * Copyright (c) 2017, ppolasek. All rights reserved. Use of this source code
+ * is governed by a BSD-style license that can be found in the LICENSE file.
+ */
+
+:host {
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+h3 {
+  display: inline;
+  margin-bottom: 15px;
+}
+
+h4 {
+  display: inline;
+  margin-bottom: 15px;
+}
+
+.name-row {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.close-link {
+  margin-left: 20px;
+  color: green;
+  border-bottom: 1px solid green;
+  cursor: pointer;
+  /*cursor: hand;*/
+}
+
+.search-field {
+  margin: 5px;
+}

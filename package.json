@@ -1,0 +1,17 @@
+{
+  "name": "Recipes4",
+  "version": "0.0.1",
+  "description": "Recipe storage using Node.js and MongoDb",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node recipes4.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Philip Polasek",
+  "license": "ISC",
+  "engines": {
+    "node": "0.12.2"
+  },
+  "dependencies": {}
+}

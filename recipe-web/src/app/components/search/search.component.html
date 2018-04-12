@@ -1,0 +1,39 @@
+<!--
+ Copyright (c) 2017, ppolasek. All rights reserved. Use of this source code
+ is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<div class="name-row layout horizontal">
+  <h4>Search for recipes</h4>
+  <span class="close-link" (click)="onCloseSearchClick()">close</span>
+</div>
+<input #box class="search-field" id="searchText" type="text"
+       (keyup)="onKey(box.value)"
+       placeholder="Search on the recipe name or notes">
+<div class="form-group form-group-sm search-field">
+  <div class="display: inline-block;">
+    <input #recipeTagList class="form-control" id="recipetagsinput"
+           list="searchTaglist"
+           name="searchTagInput"
+           placeholder="Search by tags..."
+           style="width: 180px;"
+           (input)="onTagInput(recipeTagList.value)">
+    <div *ngFor="let temptag of recipeTags" style="display: inline-block;">
+      <app-recipe-tag [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>
+    </div>
+  </div>
+  <datalist id="searchTaglist">
+    <option *ngFor="let tag of allTags" value="{{ tag.tagName }}"></option>
+  </datalist>
+</div>
+
+<app-recipe-list id="searchResults" heading="Search Results"
+                 [recipeList]="recipes"
+                 [enableHoverEvent]="true"
+                 (hovered)="onRecipeHovered($event)">
+</app-recipe-list>
+
+<div *ngIf="hoveredRecipe != null">
+  <hr style="border-top: 1px solid gray;">
+  <!-- TODO <app-recipe-view id="recipeView" [recipe]="hoveredRecipe"></app-recipe-view>-->
+</div>

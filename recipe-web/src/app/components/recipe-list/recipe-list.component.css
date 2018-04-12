@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) 2017, ppolasek. All rights reserved. Use of this source code
+ * is governed by a BSD-style license that can be found in the LICENSE file.
+ */
+
+h4 {
+  /*  margin-left: 20px; */
+}
+
+.listcontainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.listelement {
+  padding-left: 20px;
+  /*cursor: pointer;*/
+  cursor: hand;
+}
+
+.listelement:hover {
+  background-color: #fff9e6;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.selected-element {
+  background-color: #fff9e6;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid gray;
+}

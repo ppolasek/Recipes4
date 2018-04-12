@@ -1,0 +1,37 @@
+<!--
+ Copyright (c) 2017, ppolasek. All rights reserved. Use of this source code
+ is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<div *ngIf="recipe != null" class="view-component flex layout vertical">
+  <div class="name-row layout horizontal">
+    <h3>{{ recipe.recipeName }}</h3>
+    <span class="edit-link" *ngIf="recipe !== null" (click)="onEditClick()">edit</span>
+    <span class="edit-link" *ngIf="recipe !== null" (click)="onDeleteClick()">delete</span>
+  </div>
+  <div class="cookbook-row layout horizontal">
+    <h4 *ngIf="recipe.cookbook != null">{{ recipe.cookbook.name }}</h4>
+    <span class="page-nrs" *ngIf="recipe.pageNrs != null">Page nrs. </span>
+    <span>{{ recipe.pageNrs }}</span>
+  </div>
+  <div style="display: inline-block;">
+    <h4 *ngIf="recipe.recipeTags != null && recipe.recipeTags.isNotEmpty">Tags</h4>
+  </div>
+  <div class="tags-row">
+    <div *ngFor="let temptag of recipe.recipeTagsSorted; let idx = index" style="display: inline-block;"><span
+      *ngIf="idx > 0">, </span>{{ temptag.tagName }}
+    </div>
+  </div>
+  <div style="display: inline-block;">
+    <h4 *ngIf="recipe.notes != null">Notes</h4>
+  </div>
+  <div class="notes-div" *ngIf="recipe.notes != null">{{ recipe.notes }}</div>
+</div>
+<!-- TODO redo this -->
+<!--<my-dialog #editRecipeDialog id="editRecipeDialog"-->
+           <!--heading="Edit Recipe">-->
+  <!--<recipe-form [recipe]="recipe"-->
+               <!--[dialog]="editRecipeDialog"-->
+               <!--(recipeSaved)="onRecipeSaved($event)">-->
+  <!--</recipe-form>-->
+<!--</my-dialog>-->

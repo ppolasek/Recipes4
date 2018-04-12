@@ -1,0 +1,25 @@
+/*
+ * Copyright (c) 2018, ppolasek. All rights reserved. Use of this source code
+ * is governed by a BSD-style license that can be found in the LICENSE file.
+ */
+
+.recipe-tag {
+  border: 2px solid gray;
+  border-radius: 15px;
+  display: inline-block;
+  align-items: center;
+}
+
+.recipe-content {
+  margin: 1px 5px;
+  align-items: center;
+}
+
+.recipe-tag-name {
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+.recipe-btn {
+  font-size: 14px;
+}

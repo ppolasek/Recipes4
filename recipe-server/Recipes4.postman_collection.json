@@ -1,0 +1,542 @@
+{
+	"info": {
+		"name": "Recipes4",
+		"_postman_id": "89d9013e-5b29-8a18-2f71-e7f1ad06ea1d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Express",
+			"description": "",
+			"item": [
+				{
+					"name": "localhost:3000/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/wiki",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/wiki",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"wiki"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/wiki/about",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/wiki/about",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"wiki",
+								"about"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "findAddedRecently",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[ 5 ]"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/findAddedRecently",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"findAddedRecently"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getAllRecipeTags",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/getAllRecipeTags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"getAllRecipeTags"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "findMostViewed",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[ 5 ]"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/findMostViewed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"findMostViewed"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getCookbookById",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[ 3 ]"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/getCookbookById",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"getCookbookById"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCookbooks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/getAllCookbooks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"getAllCookbooks"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCookbooksObs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/getAllCookbooksObs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"getAllCookbooksObs"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "saveRecipeTag",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"tagName\": \"Mexican\",\n  \"id\": -1,\n  \"new\": false,\n  \"createdOn\": 1503435599000,\n  \"updatedOn\": 1503435599000,\n  \"version\": 0\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/saveRecipeTag",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"saveRecipeTag"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "saveRecipe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"_id\": 4,\n            \"recipeName\": \"Spaghetti - Updated\",\n            \"cookbook\": {\n                \"name\": \"From Memory\",\n                \"id\": 2,\n                \"version\": 0\n            },\n            \"recipeTags\": [\n                {\n                    \"tagName\": \"Dinner \",\n                    \"id\": 1,\n                    \"version\": 0\n                }\n            ],\n            \"id\": 4,\n            \"version\": 6,\n            \"isFavorite\": \"false\"\n        }"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/saveRecipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"saveRecipe"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "createRecipeWithNewTag",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"id\": -1,\n\t\"new\": true,\n    \"createdOn\": 1503435599000,\n    \"updatedOn\": 1503435599000,\n\t\"version\": 0,\n\t\"recipeName\": \"Chicken Meatballs 2\",\n\t\"category\": null,\n\t\"notes\": \"new recipe\",\n\t\"cookbook\": null,\n\t\"pageNrs\": \"38-39\",\n\t\"recipeUrl\": null,\n\t\"assetName\": null,\n\t\"recipeTags\": [\n\t\t{ \"tagName\": \"Late Snack\", \"id\": -1, \"new\": false, \"createdOn\":1503435599000, \"updatedOn\": 1503435599000, \"version\": 0 },\n\t\t{ \"tagName\": \"Sandwich\", \"id\": 4, \"new\": false, \"createdOn\":1503435599000, \"updatedOn\": 1503435599000, \"version\": 0 }\n\t],\n\t\"isFavorite\": null,\n\t\"isValid\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/saveRecipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"saveRecipe"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "createRecipeWithExistingTags",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"id\": -1,\n\t\"new\": true,\n    \"createdOn\": 1503435599000,\n    \"updatedOn\": 1503435599000,\n\t\"version\": 0,\n\t\"recipeName\": \"Thai Beef\",\n\t\"category\": null,\n\t\"notes\": \"new recipe\",\n\t\"cookbook\": null,\n\t\"pageNrs\": \"38-39\",\n\t\"recipeUrl\": null,\n\t\"assetName\": null,\n\t\"recipeTags\": [\n\t\t{ \"tagName\": \"Dinner\", \"id\": 1, \"new\": false, \"createdOn\":1503435599000, \"updatedOn\": 1503435599000, \"version\": 0 }\n\t],\n\t\"isFavorite\": null,\n\t\"isValid\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/saveRecipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"saveRecipe"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getRecipe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[ 4 ]"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/getRecipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"getRecipe"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getRecipeWithHistory",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[ 8 ]"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/getRecipeWithHistory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"getRecipeWithHistory"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "deleteRecipe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[ 7 ]"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/deleteRecipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"deleteRecipe"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "recipeSearch by String value",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"searchText\":\"chicken\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/recipeSearch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"recipeSearch"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "recipeSearch by tags",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tags\":[{\"tagName\":\"Dinner\",\"id\":1,\"version\":0}]}"
+				},
+				"url": {
+					"raw": "http://localhost:8191/Recipes4/services/recipeSearch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8191",
+					"path": [
+						"Recipes4",
+						"services",
+						"recipeSearch"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,140 @@
+/*
+ * Copyright (c) 2018, ppolasek. All rights reserved. Use of this source code
+ * is governed by a BSD-style license that can be found in the LICENSE file.
+ */
+
+/* Recipe4 app.component's private CSS styles */
+
+:host {
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainpage {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+  background-color: #d9f2e6;
+}
+
+.main-content {
+  margin-right: 10vw;
+  margin-left: 10vw;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+  width: 50vw;
+}
+
+.recipe-header-block {
+  border-bottom: 2px solid gray;
+  display: flex;
+  align-items: flex-end;
+}
+
+.home-link {
+  flex: 0 0 50px;
+}
+
+.recipe-heading {
+  flex: 1;
+}
+
+.recipe-head {
+  display: flex; /* establish flex container */
+  justify-content: center; /* center items vertically, in this case */
+}
+
+.recipe-head-desc {
+  padding: 5px;
+  display: flex; /* establish flex container */
+  justify-content: center; /* center items vertically, in this case */
+}
+
+.main-body {
+  display: flex;
+  flex: 1;
+}
+
+.main-links {
+  overflow: auto;
+  border-right: 1px solid gray;
+  padding: 10px;
+}
+
+.button-bar {
+  margin: 5px;
+}
+
+.main-lists {
+}
+
+.viewing-area {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/*.border-brown {
+    border: 2px solid brown;
+}*/
+
+/*.border-orange {
+    border: 2px solid orange;
+}*/
+
+.border-yellow {
+  border: 2px solid yellow;
+}
+
+.border-green {
+  border: 2px solid green;
+}
+
+/*.border-red {
+    border: 2px solid red;
+}*/
+
+.recipe-footer {
+  display: flex; /* establish flex container */
+  flex-direction: column; /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  align-items: center; /* center items horizontally, in this case */
+  border-top: 2px solid gray;
+  padding: 5px;
+  /*margin: auto;*/
+  /*width: 50%;*/
+}
+
+/*.maincontainer {*/
+/*display: flex;*/
+/*flex-flow: row nowrap;*/
+/*}*/
+
+/*.catlist {*/
+/*display: flex;*/
+/*flex-flow: column nowrap;*/
+/*align-items: flex-start;*/
+/*}*/
+
+/*.childelement {*/
+/*margin-right: 50px;*/
+/*}*/
+
+/*.my-modal-content {*/
+/*margin: 0px 15px 0px 15px;*/
+/*}*/
+
+/*.mylayout {*/
+/*}*/

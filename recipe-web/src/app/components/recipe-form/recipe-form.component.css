@@ -1,0 +1,38 @@
+/*
+ * Copyright (c) 2017, ppolasek. All rights reserved. Use of this source code
+ * is governed by a BSD-style license that can be found in the LICENSE file.
+ */
+
+:host {
+  line-height: 18px;
+}
+
+.my-modal-content {
+  margin: 0 15px 0 15px;
+}
+
+.formcontainer {
+  display: flex;
+  justify-content: center;
+}
+
+.recipe-optional {
+  margin-left: 20px;
+}
+
+.recipe-input {
+  width: 200px;
+}
+
+.myformcontrol {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  padding: 2px 5px 2px 5px;
+  border-radius: .25rem;
+  border: 1px solid rgba(0, 0, 0, .15);
+}
+
+label {
+  margin-bottom: 3px;
+}

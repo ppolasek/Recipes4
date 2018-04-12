@@ -1,0 +1,101 @@
+<!--
+ Copyright (c) 2017, ppolasek. All rights reserved. Use of this source code
+ is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<!-- Modal -->
+<div class="modal fade" [class.show]="visible" [style.display]="visible ? 'block' : 'none'"
+     id="myModalDialogId"
+     tabindex="-1" role="dialog" aria-labelledby="modalDialogTitleId" aria-hidden="true">
+  <div id="dialogdiv" class="modal-dialog" role="document">
+
+    <!-- Modal content-->
+    <div id="modalcontent" class="modal-content">
+      <div class="modal-header">
+        <h4 id="modalDialogTitleId" class="modal-title">{{heading}}</h4>
+        <button type="button" class="close" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="my-modal-content modal-body mylayout">
+        <!--{{diagnostic}}-->
+        <form class="form-horizontal" *ngIf="recipe !== null"
+              (ngSubmit)="onSubmitClick()"
+              #recipeForm="ngForm">
+          <div class="form-group form-group-sm">
+            <label for="recipeName">Name</label>
+            <input type="text" class="myformcontrol input-sm" id="recipeName" required
+                   name="recipeName"
+                   [(ngModel)]="recipe.recipeName">
+          </div>
+          <div class="recipe-optional">
+            <div class="form-group form-group-sm">
+              <label>Cookbook Name</label>
+              <div class="form-inline">
+                <div *ngIf="showCookbooks" style="display: inline;">
+                  <select class="myformcontrol input-sm" id="cookbookSelect"
+                          name="cookbookSelect"
+                          [(ngModel)]="cookbookTitle">
+                    <option value="">Select...</option>
+                    <option *ngFor="let cookbook of cookbookList">{{cookbook.name}}</option>
+                  </select>
+                </div>
+                <div style="display: inline;">
+                  <input type="text" class="myformcontrol input-sm" id="cookbookName" style="width: 200px;"
+                         placeholder="Or create a new cookbook"
+                         name="cookbookName"
+                         [(ngModel)]="cookbookName">
+                </div>
+                <div style="display: inline;">
+                  <input type="text" class="myformcontrol input-sm" id="pageNrs"
+                         placeholder="page numbers"
+                         name="pageNrs"
+                         [(ngModel)]="recipe.pageNrs">
+                </div>
+              </div>
+            </div>
+          </div>
+          <label>OR</label>
+          <div class="recipe-optional">
+            <div class="form-group form-group-sm">
+              <label for="recipeUrl">Recipe URL</label>
+              <input type="text" class="myformcontrol input-sm" id="recipeUrl"
+                     name="recipeUrl"
+                     [(ngModel)]="recipe.recipeUrl">
+            </div>
+          </div>
+          <div class="form-group form-group-sm">
+            <label for="recipetags">Tags</label>
+            <div class="display: inline-block;">
+              <input class="myformcontrol input-sm" #recipeTagListRef id="recipetags"
+                     list="tagDatalist"
+                     name="tagInput"
+                     style="width: 150px;"
+                     [(ngModel)]="recipetag"
+                     (keyup)="onTagKeyUp($event)"
+                     (input)="onTagInput($event)">
+              <div *ngFor="let temptag of recipe.recipeTags" style="display: inline-block;">
+                <!-- TODO <app-recipe-tag [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>-->
+              </div>
+            </div>
+            <datalist id="tagDatalist">
+              <option *ngFor="let tag of allTags" value="{{ tag.tagName }}"></option>
+            </datalist>
+          </div>
+          <div class="form-group form-group-sm">
+            <label for="notes">Notes</label>
+            <textarea class="myformcontrol input-sm" rows="4" id="notes"
+                      name="notes"
+                      [(ngModel)]="recipe.notes"></textarea>
+          </div>
+          <input type="button" class="btn btn-default btn-sm" value="Save"
+                 (click)="onSubmitClick()"
+                 [disabled]="!recipe.isValid">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #closeButton type="button" class="btn btn-default btn-sm" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

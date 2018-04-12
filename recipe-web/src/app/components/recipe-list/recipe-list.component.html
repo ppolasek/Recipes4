@@ -1,0 +1,14 @@
+<!--
+ Copyright (c) 2018, ppolasek. All rights reserved. Use of this source code
+ is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<h4>{{ heading }}</h4>
+<div class="listcontainer">
+  <div id="recipe{{idx}}" class="listelement" *ngFor="let recipe of recipeList; let idx = index"
+      (mouseover)="onMouseOver(recipe.id)"
+      (mouseout)="onMouseOut(recipe.id)"
+      (click)="onMouseClick(recipe.id)">
+    {{ idx + 1 }}. {{ recipe.recipeName }}
+  </div>
+</div>

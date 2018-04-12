@@ -1,0 +1,28 @@
+<!--
+ Copyright (c) 2017, ppolasek. All rights reserved. Use of this source code
+ is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<!-- Modal -->
+<div class="modal" [class.show]="visible" [style.display]="visible ? 'block' : 'none'"
+     id="myModalDialogId"
+     tabindex="-1" role="dialog" aria-labelledby="modalDialogTitleId" aria-hidden="true">
+  <div id="dialogdiv" class="modal-dialog" role="document">
+
+    <!-- Modal content-->
+    <div id="modalcontent" class="modal-content">
+      <div class="modal-header">
+        <h4 id="modalDialogTitleId" class="modal-title">{{heading}}</h4>
+        <button type="button" class="close" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="my-modal-content modal-body mylayout">
+        <ng-content></ng-content>
+      </div>
+      <div class="modal-footer">
+        <button #closeButton type="button" class="btn btn-default btn-sm" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

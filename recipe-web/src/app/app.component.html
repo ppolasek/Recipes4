@@ -1,0 +1,80 @@
+<!--
+ Copyright (c) 2018, ppolasek. All rights reserved. Use of this source code
+ is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<div class="mainpage border-brown">
+  <div class="main-content border-red">
+    <div class="recipe-header-block">
+      <div class="home-link">
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+      </div>
+      <div class="recipe-heading">
+        <header class="recipe-head">
+          <h1>My Favorite Recipes4</h1>
+        </header>
+        <div class="recipe-head-desc">
+          Organize all your favorite recipes!
+        </div>
+      </div>
+    </div>
+    <div class="main-body">
+      <div class="main-links layout vertical">
+        <div class="layout horizontal button-bar">
+          <button class="btn btn-info btn-sm" type="button" #openButton (click)="onAddClick()">Add New Recipe</button>
+          <button class="btn btn-info btn-sm" type="button" #searchButton routerLink="/search">Search</button>
+        </div>
+        <div class="main-lists layout vertical">
+          <h3>Recipes</h3>
+          <app-added-recently id="addedRecently" [listSize]="5"></app-added-recently>
+          <app-most-viewed id="mostViewed" [listSize]="5"></app-most-viewed>
+        </div>
+      </div>
+      <div class="viewing-area border-orange">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <footer class="recipe-footer">
+      Copyright (c) 2018, Phil Polasek. All rights reserved.
+    </footer>
+  </div>
+</div>
+<app-recipe-form id="addRecipeDialog"
+                 heading="New Recipe"
+                 (close)="showAddRecipeDialog = false"
+                 [(visible)]="showAddRecipeDialog">
+</app-recipe-form>
+<!--<app-dialog id="addRecipeDialog"-->
+            <!--heading="New Recipe"-->
+            <!--(close)="showAddRecipeDialog = false"-->
+            <!--[(visible)]="showAddRecipeDialog">-->
+  <!--<app-recipe-form></app-recipe-form>-->
+<!--</app-dialog>-->
+
+
+<!--Button trigger modal-->
+
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
+  <!--Launch demo modal-->
+<!--</button>-->
+
+<!--&lt;!&ndash; Modal &ndash;&gt;-->
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+  <!--<div class="modal-dialog" role="document">-->
+    <!--<div class="modal-content">-->
+      <!--<div class="modal-header">-->
+        <!--<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+          <!--<span aria-hidden="true">&times;</span>-->
+        <!--</button>-->
+      <!--</div>-->
+      <!--<div class="modal-body">-->
+        <!--...-->
+      <!--</div>-->
+      <!--<div class="modal-footer">-->
+        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
