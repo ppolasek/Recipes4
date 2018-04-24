@@ -15,7 +15,7 @@
     <span>{{ recipe.pageNrs }}</span>
   </div>
   <div style="display: inline-block;">
-    <h4 *ngIf="recipe.recipeTags != null && recipe.recipeTags.isNotEmpty">Tags</h4>
+    <h4 *ngIf="recipe.recipeTags != null && recipe.recipeTags.length > 0">Tags</h4>
   </div>
   <div class="tags-row">
     <div *ngFor="let temptag of recipe.recipeTagsSorted; let idx = index" style="display: inline-block;"><span
@@ -27,7 +27,14 @@
   </div>
   <div class="notes-div" *ngIf="recipe.notes != null">{{ recipe.notes }}</div>
 </div>
-<!-- TODO redo this -->
+
+<app-recipe-form id="editRecipeDialog"
+                 heading="Edit Recipe"
+                 [recipe]="recipe"
+                 (close)="editRecipeDialogVisible = false"
+                 [(visible)]="editRecipeDialogVisible">
+</app-recipe-form>
+
 <!--<my-dialog #editRecipeDialog id="editRecipeDialog"-->
            <!--heading="Edit Recipe">-->
   <!--<recipe-form [recipe]="recipe"-->

@@ -18,7 +18,9 @@ export class RecipeViewComponent implements OnInit {
   private logger: Recipes4Logger = new Recipes4Logger(this.loggerService, 'RecipeViewComponent');
 
 //  @Input()
-  recipe: Observable<Recipe> = null;
+  recipe: Recipe = null;
+
+  editRecipeDialogVisible: boolean = false;
 
   constructor(
       private loggerService: WebLoggerService,
@@ -28,57 +30,18 @@ export class RecipeViewComponent implements OnInit {
   ngOnInit() {
     this.logger.fine('ngOnInit()');
 
-    /*
-    this.hero$ = this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.service.getHero(params.get('id')));
-    */
-
-    this.recipe = this.route.paramMap
-      .switchMap((params: ParamMap) => {
-        this.logger.fine('ngOnInit() param id = ' + params.get('id'));
-
-        let id: number = -1;
-        if (params.get('id') !== null) {
-          id = +params.get('id');
-        }
-
-        this.logger.fine('ngOnInit() number id = ' + id);
-
-        return this.recipeService.getRecipe(id);
-      });
-
-    // this.recipe = this.route.paramMap
-    //   .pipe(
-    //     tap((params: ParamMap) => this.logger.fine('ngOnInit() param id = ' + params.get('id'))),
-    //     switchMap((params: ParamMap) => {
-    //       let id: number = -1;
-    //       if (params.get('id') !== null) {
-    //         id = +params.get('id');
-    //       }
-    //       return of(id);
-    //     }),
-    //     tap((id: number) => this.logger.fine('ngOnInit() number id = ' + id)),
-    //     switchMap((id: number) => {
-    //       return this.recipeService.getRecipe(id);
-    //     })
-    //   );
-
-    // let id = _routeParams?.get('id');
+    // const id = +this.route.snapshot.paramMap.get('id');
     // this.logger.fine('ngOnInit() id = ' + id);
 
-    // if (_id != null) {
-    //   var id = int.parse(_id, onError :(_) => null);
-    //   this.logger.fine('ngOnInit() id = $id');
-    //   recipe = await  _recipeService.getRecipe(id);
-    // }
-  }
-/*
+    this.route.paramMap.subscribe(params => {
+      this.logger.fine('ngOnInit() params.get(\'id\') = ' + params.get('id'));
+      let id = +params.get('id');
+      this.logger.fine('ngOnInit() id = ' + id);
 
-  ngOnInit() async {
-    this.logger.loggerName = 'RecipeViewComponent';
+      this.recipeService.getRecipe(id).subscribe(recipe => this.recipe = recipe);
+    });
   }
-*/
+
   onRecipeSaved(event) {
     this.logger.fine('onRecipeSaved() event = ' + event);
     // if (event != null && event['recipe'] != null) {
@@ -87,8 +50,8 @@ export class RecipeViewComponent implements OnInit {
   }
 
   onEditClick() {
-    this.logger.fine('onEditClick() event = ' + event);
-    // editRecipeDialogComp.visible = true;
+    this.logger.fine('onEditClick() id = ' + this.recipe.id);
+    this.editRecipeDialogVisible = true;
   }
 
   onDeleteClick() {

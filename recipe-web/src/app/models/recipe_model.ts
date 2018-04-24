@@ -20,7 +20,7 @@ export class Recipe extends DomainCommon {
   isFavorite: boolean = false;
   recipeTags: Array<RecipeTag> = [];
 
-  recipeTagsSorted(): Array<RecipeTag> {
+  get recipeTagsSorted(): Array<RecipeTag> {
     if (this.recipeTags !== null && this.recipeTags.length > 1) {
       this.recipeTags.sort((r1, r2) => {
         if (r1.tagName.toLowerCase() < r2.tagName.toLowerCase()) {
@@ -165,7 +165,7 @@ export class SearchCriteria {
       (this.cookbookIds !== null && this.cookbookIds.length !== 0));
   }
 
-   toJson(): Map<string, any> {
+  toJson(): Map<string, any> {
     let jsonMap: Map<string, any> = new Map<string, any>();
     RecipeUtil.addIfNotNull(jsonMap, "searchText",  this.searchText);
     RecipeUtil.addIfNotNull(jsonMap, "tags", this.tags !== null ? RecipeTag.toJsonArray(this.tags) : null);

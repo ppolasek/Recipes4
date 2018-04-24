@@ -16,11 +16,6 @@ import { RecipeUtil } from "../../util/recipe_util";
 export class RecipeFormComponent implements OnInit {
   private logger: Recipes4Logger = new Recipes4Logger(this.loggerService, 'RecipeFormComponent');
 
-  _recipe: Recipe = new Recipe();
-  get recipe(): Recipe {
-    return this._recipe;
-  }
-
   @Input()
   heading: string;
 
@@ -29,9 +24,6 @@ export class RecipeFormComponent implements OnInit {
 
   @Input()
   visible: boolean = false;
-
-  @Output('close')
-  closeEvent = new EventEmitter();
 
   @Input()
   set recipe(newValue: Recipe) {
@@ -42,8 +34,17 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
+  _recipe: Recipe = new Recipe();
+  get recipe(): Recipe {
+    return this._recipe;
+  }
+
+  @Output('close')
+  closeEvent = new EventEmitter();
+
   @Output('recipeSaved')
   recipeSaved = new EventEmitter();
+
 
   _cookbookTitle: string;
   get cookbookTitle() {
