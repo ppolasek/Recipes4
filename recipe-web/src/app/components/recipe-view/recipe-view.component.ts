@@ -3,7 +3,7 @@ import { Recipes4Logger } from "../logger/logger";
 import { WebLoggerService } from "../../services/logger_service";
 import { WebRecipeService } from "../../services/recipe_service";
 import { Recipe } from "../../models/recipe_model";
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import { tap, switchMap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import { of } from 'rxjs/observable/of';
@@ -25,7 +25,9 @@ export class RecipeViewComponent implements OnInit {
   constructor(
       private loggerService: WebLoggerService,
       private recipeService: WebRecipeService,
-      private route: ActivatedRoute) { }
+      private route: ActivatedRoute,
+      private router: Router,
+  ) {}
 
   ngOnInit() {
     this.logger.fine('ngOnInit()');
@@ -42,11 +44,11 @@ export class RecipeViewComponent implements OnInit {
     });
   }
 
-  onRecipeSaved(event) {
+  onRecipeSaved(event: Map<String, any>) {
     this.logger.fine('onRecipeSaved() event = ' + event);
-    // if (event != null && event['recipe'] != null) {
-    //   recipe = event['recipe'];
-    // }
+    if (event != null && event['recipe'] != null) {
+      this.recipe = event['recipe'];
+    }
   }
 
   onEditClick() {
@@ -55,9 +57,15 @@ export class RecipeViewComponent implements OnInit {
   }
 
   onDeleteClick() {
-    this.logger.fine('onDeleteClick() event = ' + event);
-    // _recipeService.deleteRecipe(recipe.id).then((success) {
-    //   if (success) _recipeEvents.recipeDeleted(recipe.id);
-    // });
+    this.logger.fine('onDeleteClick() id = ' + this.recipe.id);
+    this.recipeService.deleteRecipe(this.recipe.id).subscribe((success) => {
+      this.logger.fine('onDeleteClick() success = ' + success);
+      if (success === true) {
+        // TODO how to send notification to other components that this recipe was deleted and they need to update?
+        // _recipeEvents.recipeDeleted(recipe.id);
+
+        this.router.navigate(['/home']);
+      }
+    });
   }
 }

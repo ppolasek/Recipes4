@@ -103,8 +103,8 @@ export class RecipeFormComponent implements OnInit {
     this.logger.fine('onSubmitClick() recipe.isValid() = ' + this.recipe.isValid());
     this.logger.fine('onSubmitClick() recipe.isNew() = ' + this.recipe.isNew());
 
-    if (this.recipe.isValid) {
-      if (this.recipe.isNew) {
+    if (this.recipe.isValid() === true) {
+      if (this.recipe.isNew() === true) {
         // This is a new recipe so call 'create' instead of 'save'
         this.recipeService.createRecipe(this.recipe).subscribe(
           updatedRecipe => {
@@ -117,10 +117,10 @@ export class RecipeFormComponent implements OnInit {
             // // Event from this component only
             this.recipeSaved.emit({'recipe': updatedRecipe});
 
-            // // Notifies application-wide components that a recipe was updated
-            // this.recipeEvents.recipeAdded(updatedRecipe.id);
+            // Notifies application-wide components that a recipe was updated
+            // TODO still need to figure this out: this.recipeEvents.recipeAdded(updatedRecipe.id);
 
-            // if the call succeeded and there was a new cookbook given then
+            // if the call succeeded and there was a new cookbook then
             // reload them
             if (updatedRecipe !== null && this._isNewCookbook) {
               this._loadCookbooks();
@@ -128,28 +128,30 @@ export class RecipeFormComponent implements OnInit {
 
           this.close();
         });
-        // // This is a new recipe so call 'create' instead of 'save'
-        // _recipeService.createRecipe(recipe).then((updatedRecipe) {
-        //   this.logger.fine('onSubmitClick() updatedRecipe = $updatedRecipe');
-        //
-        //   // null the current recipe, and get the new list of tags
-        //   recipe = new Recipe();
-        //   _loadRecipeTags();
-        //
-        //   // Event from this component only
-        //   _recipeSavedController.add({'recipe': updatedRecipe});
-        //
-        //   // Notifies application-wide components that a recipe was updated
-        //   _recipeEvents.recipeAdded(updatedRecipe.id);
-        //
-        //   // if the call succeeded and there was a new cookbook given then
-        //   // reload them
-        //   if (updatedRecipe !== null && _isNewCookbook) {
-        //     _loadCookbooks();
-        //   }
-        //
-        //   dialog.visible = false;
-        // });
+      } else {
+        // This is an existing recipe so call 'save' instead of 'create'
+        this.recipeService.saveRecipe(this.recipe).subscribe(
+          updatedRecipe => {
+            this.logger.fine('onSubmitClick() updatedRecipe = ' + updatedRecipe);
+
+            // null the current recipe, and get the new list of tags
+            this.recipe = new Recipe();
+            this._loadRecipeTags();
+
+            // // Event from this component only
+            this.recipeSaved.emit({'recipe': updatedRecipe});
+
+            // Notifies application-wide components that a recipe was updated
+            // TODO still need to figure this out: this.recipeEvents.recipeAdded(updatedRecipe.id);
+
+            // if the call succeeded and there was a new cookbook then
+            // reload them
+            if (updatedRecipe !== null && this._isNewCookbook) {
+              this._loadCookbooks();
+            }
+
+            this.close();
+          });
       // TODO } else {
       //   // This is an existing recipe so call 'save' instead of 'create'
       //   _recipeService.saveRecipe(recipe).then((updatedRecipe) {
@@ -274,7 +276,7 @@ export class RecipeFormComponent implements OnInit {
   }
 
   _cookbookTitleChanged() {
-    if (this.cookbookList !== null && this.cookbookList.length > 0 && this.cookbookTitle !== null && this.cookbookTitle.length > 0) {
+    if (this.cookbookList !== undefined && this.cookbookList !== null && this.cookbookList.length > 0 && this.cookbookTitle !== null && this.cookbookTitle.length > 0) {
       let cookbook = this.cookbookList.find(function (cookbook) {
         return cookbook.name === this;
       }, this.cookbookTitle); // See Also: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find

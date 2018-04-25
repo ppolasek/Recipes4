@@ -32,7 +32,7 @@
             <div class="form-group form-group-sm">
               <label>Cookbook Name</label>
               <div class="form-inline">
-                <div *ngIf="showCookbooks" style="display: inline;">
+                <div *ngIf="showCookbooks" style="display: inline;"> <!-- TODO move the inline style to the CSS file -->
                   <select class="myformcontrol input-sm" id="cookbookSelect"
                           name="cookbookSelect"
                           [(ngModel)]="cookbookTitle">
@@ -40,13 +40,13 @@
                     <option *ngFor="let cookbook of cookbookList">{{cookbook.name}}</option>
                   </select>
                 </div>
-                <div style="display: inline;">
+                <div style="display: inline;"> <!-- TODO move the inline style to the CSS file -->
                   <input type="text" class="myformcontrol input-sm" id="cookbookName" style="width: 200px;"
                          placeholder="Or create a new cookbook"
                          name="cookbookName"
-                         [(ngModel)]="cookbookName">
+                         [(ngModel)]="cookbookName"> <!-- TODO move the inline style to the CSS file -->
                 </div>
-                <div style="display: inline;">
+                <div style="display: inline;"> <!-- TODO move the inline style to the CSS file -->
                   <input type="text" class="myformcontrol input-sm" id="pageNrs"
                          placeholder="page numbers"
                          name="pageNrs"
@@ -73,8 +73,9 @@
                      style="width: 150px;"
                      [(ngModel)]="recipetag"
                      (keyup)="onTagKeyUp($event)"
-                     (input)="onTagInput($event)">
+                     (input)="onTagInput($event)"> <!-- TODO move the inline style to the CSS file -->
               <div *ngFor="let temptag of recipe.recipeTags" style="display: inline-block;">
+                <!-- TODO move the inline style to the CSS file -->
                 <!-- TODO <app-recipe-tag [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>-->
               </div>
             </div>
@@ -90,7 +91,7 @@
           </div>
           <input type="button" class="btn btn-default btn-sm" value="Save"
                  (click)="onSubmitClick()"
-                 [disabled]="!recipe.isValid">
+                 [disabled]="!recipe.isValid()">
         </form>
       </div>
       <div class="modal-footer">

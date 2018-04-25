@@ -76,7 +76,7 @@ export class SearchComponent implements OnInit {
   }
 
   onCloseSearchClick() {
-       this.router.navigate(['/home']);
+    this.router.navigate(['/home']);
   }
 
   onKey(value: string) {
