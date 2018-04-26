@@ -27,7 +27,7 @@ export class RecipeTagComponent implements OnInit {
 
   /// The user clicked to remove the tag from the recipe
   onDeleteClick() {
-    this.logger.fine('onDeleteClick() deleting this tag: $tag');
+    this.logger.fine('onDeleteClick() deleting this tag: ' + this.tag);
     let tagEvent = new RecipeTagEvent();
     tagEvent.type = RecipeTagEventType.DELETE;
     tagEvent.tag = this.tag;

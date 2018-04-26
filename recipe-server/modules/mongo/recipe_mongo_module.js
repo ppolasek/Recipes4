@@ -156,8 +156,8 @@ var _saveCookbook = function (cookbook) {
         logger.debug('recipe_mongo_module._saveCookbook() inserting a cookbook');
         return mydb.insertOne(collection_cookbook, cookbook);
     } else {
-        logger.debug('recipe_mongo_module._saveCookbook() nothing to save; returning empty observable');
-        return Rx.Observable.of({});
+        logger.debug('recipe_mongo_module._saveCookbook() nothing to save; returning cookbook as-is');
+        return Rx.Observable.of(cookbook);
     }
 }
 

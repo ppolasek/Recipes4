@@ -18,7 +18,6 @@
         </button>
       </div>
       <div class="my-modal-content modal-body mylayout">
-        <!--{{diagnostic}}-->
         <form class="form-horizontal" *ngIf="recipe !== null"
               (ngSubmit)="onSubmitClick()"
               #recipeForm="ngForm">
@@ -66,17 +65,17 @@
           </div>
           <div class="form-group form-group-sm">
             <label for="recipetags">Tags</label>
-            <div class="display: inline-block;">
+            <div class="display: inline-block;"> <!-- TODO move the inline style to the CSS file -->
               <input class="myformcontrol input-sm" #recipeTagListRef id="recipetags"
                      list="tagDatalist"
                      name="tagInput"
                      style="width: 150px;"
                      [(ngModel)]="recipetag"
                      (keyup)="onTagKeyUp($event)"
-                     (input)="onTagInput($event)"> <!-- TODO move the inline style to the CSS file -->
+                     (input)="onTagInput(recipeTagListRef.value)"> <!-- TODO move the inline style to the CSS file -->
               <div *ngFor="let temptag of recipe.recipeTags" style="display: inline-block;">
                 <!-- TODO move the inline style to the CSS file -->
-                <!-- TODO <app-recipe-tag [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>-->
+                 <app-recipe-tag [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>
               </div>
             </div>
             <datalist id="tagDatalist">

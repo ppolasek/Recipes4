@@ -29,7 +29,7 @@ export class RecipeUtil {
 
     let whole = '';
     text.split(' ').forEach((part) => {
-      console.log('RecipeUtil.toTitleCaseAll() part = $part');
+      console.log('RecipeUtil.toTitleCaseAll() part = ' + part);
       whole += this.toTitleCase(part) + ' ';
     });
 

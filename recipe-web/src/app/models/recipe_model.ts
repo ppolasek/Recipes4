@@ -116,6 +116,13 @@ export class RecipeTag extends DomainCommon {
     return jsonMap;
   }
 
+  static fromValues(tagname: string): RecipeTag {
+    let temp: RecipeTag = new RecipeTag();
+    temp.tagName = tagname;
+
+    return temp;
+  }
+
   static fromJson(jsonMap: Map<string, any>): RecipeTag {
     let temp: RecipeTag = new RecipeTag();
     if (jsonMap['id'] !== null)      temp.id      = jsonMap['id'];

@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { WebLoggerService } from "../../services/logger_service";
 import { Recipes4Logger } from "../logger/logger";
-import { Recipe, RecipeTag } from "../../models/recipe_model";
+import {Recipe, RecipeTag, RecipeTagEventType} from "../../models/recipe_model";
 import { Cookbook } from "../../models/cookbook_model";
 import { WebRecipeService } from "../../services/recipe_service";
 import { WebCookbookService } from "../../services/cookbook_service";
@@ -68,11 +68,7 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
-  allTags: Array<RecipeTag>;
-
-  get diagnostic(): string {
-    return `DIAGNOSTIC: ${this.recipe}, cookbookTitle: ${this.cookbookTitle}, cookbookName: ${this.cookbookName}`;
-  }
+  allTags: Array<RecipeTag> = [];
 
   cookbookList: Array<Cookbook>;
   showCookbooks: boolean = true;
@@ -152,98 +148,79 @@ export class RecipeFormComponent implements OnInit {
 
             this.close();
           });
-      // TODO } else {
-      //   // This is an existing recipe so call 'save' instead of 'create'
-      //   _recipeService.saveRecipe(recipe).then((updatedRecipe) {
-      //     this.logger.fine('onSubmitClick() updatedRecipe = $updatedRecipe');
-      //
-      //     // null the current recipe, and get the new list of tags
-      //     recipe = new Recipe();
-      //     _loadRecipeTags();
-      //
-      //     // Event from this component only
-      //     _recipeSavedController.add({'recipe': updatedRecipe});
-      //
-      //     // Notifies application-wide components that a recipe was updated
-      //     _recipeEvents.recipeUpdated(updatedRecipe.id);
-      //
-      //     // if the call succeeded and there was a new cookbook given then
-      //     // reload them
-      //     if (updatedRecipe !== null && _isNewCookbook) {
-      //       _loadCookbooks();
-      //     }
-      //
-      //     dialog.visible = false;
-      //   });
       }
     }
   }
 
   /// Take the tag name from the input box if the user presses the enter key.
   onTagKeyUp(event) {
-    this.logger.fine('onTagKeyUp() recipetag = $recipetag, event.runtimeType = ' + event.runtimeType);
+    this.logger.fine('onTagKeyUp() recipetag = ' + this.recipetag + ', event.runtimeType = ' + event.runtimeType);
+    this.logger.fine('onTagKeyUp() event.keyCode = ' + event.keyCode);
+    this.logger.fine('onTagKeyUp() event.which = ' + event.which);
 
-    // TODO if (event.keyCode === 13 || event.which === 13) {
-    //   if (recipetag !== null && recipetag.isNotEmpty) {
-    //     this.logger.fine('onTagKeyUp() enter key pressed. keeping $recipetag & clearing the selection');
-    //
-    //     // convert the entered tag to start with an upper-case letter and the rest to lower-case,
-    //     // and then create a tag from it
-    //     recipe.recipeTags.add(new RecipeTag.fromValues(RecipeUtil.toTitleCaseAll(recipetag)));
-    //   }
-    //
-    //   recipetag = null;
-    // }
+    if (event.keyCode === 13 || event.which === 13) {
+      if (this.recipetag !== null && this.recipetag.length > 0) {
+        this.logger.fine('onTagKeyUp() enter key pressed. keeping ' + this.recipetag + ' & clearing the selection');
+
+        // convert the entered tag to start with an upper-case letter and the rest to lower-case,
+        // and then create a tag from it
+        this.recipe.recipeTags.push(RecipeTag.fromValues(RecipeUtil.toTitleCaseAll(this.recipetag)));
+      }
+
+      this.recipetag = null;
+    }
   }
 
   /// Fires when an input value appears, but ignore those not in the dropdown
   /// list, as those are manual entries from the keyboard.
-  onTagInput(event) {
-    this.logger.fine('onTagInput() recipeTagListRef.nativeElement.value = ' + this.recipeTagListRef.nativeElement.value);
+  onTagInput(inputvalue) {
+    this.logger.fine('onTagInput() inputvalue = ' + inputvalue);
 
-    // TODO if (allTags !== null && allTags.isNotEmpty) {
-    //   var tempTag =
-    //       allTags.firstWhere((rtag) => rtag.tagName === recipeTagListRef.nativeElement.value, orElse: () => null);
-    //
-    //   if (tempTag !== null) {
-    //     this.logger.fine(
-    //         'onTagInput() this is from the dropdown. keeping ${recipeTagListRef.nativeElement.value} & clearing the selection');
-    //
-    //     // this is a tag from the dropdown list, so keep it as the selected item
-    //     recipe.recipeTags.add(tempTag);
-    //
-    //     // and remove the tag from the selection
-    //     allTags.remove(tempTag);
-    //
-    //     recipeTagListRef.nativeElement.value = null;
-    //   }
-    // }
+    if (this.allTags !== null && this.allTags.length > 0) {
+
+      let tempTag = this.allTags.find(function (rtag) {
+          return rtag.tagName === this;
+      }, inputvalue);
+
+      this.logger.fine('onTagInput() tempTag = ' + tempTag);
+
+      if (tempTag !== undefined && tempTag !== null) {
+        this.logger.fine(
+            'onTagInput() this is from the dropdown. keeping ' + inputvalue +
+            ' & clearing the selection');
+
+        // this is a tag from the dropdown list, so keep it as the selected item
+        this.recipe.recipeTags.push(tempTag);
+
+        // and remove the tag from the selection
+        this.allTags = this.allTags.filter(item => item !== tempTag);
+
+        this.recipeTagListRef.nativeElement.value = null;
+      }
+    }
   }
 
   /// handle events related to tags being added & removed from this recipe.
   onTagEvent(event) {
     this.logger.fine('onTagEvent() event = ' + event);
 
-    // // remove this tag from the list of tags
-    // TODO if (RecipeTagEvent.DELETE === event[RecipeTagEvent.TYPE]) {
-    //   var eventTag = new RecipeTag.fromJson(event[RecipeTagEvent.TAG]);
-    //   this.logger.finest('onTagEvent() eventTag = $eventTag');
-    //
-    //   // if the tag was pre-existing,
-    //   // add the deleted tag back to the 'allTags' list
-    //   if (!eventTag.isNew) {
-    //     allTags.add(eventTag);
-    //     allTags.sort((a, b) => a.tagName.compareTo(b.tagName));
-    //   }
-    //
-    //   if (eventTag.isNew) {
-    //     this.logger.finer('onTagEvent() removing tag by name');
-    //     recipe.recipeTags?.removeWhere((tag) => tag.tagName === eventTag.tagName);
-    //   } else {
-    //     this.logger.finer('onTagEvent() removing tag by id');
-    //     recipe.recipeTags?.removeWhere((tag) => tag.id === eventTag.id);
-    //   }
-    // }
+    // Remove this tag from the list of tags.
+    if (RecipeTagEventType.DELETE == event.type) {
+      // if the tag was pre-existing,
+      // add the deleted tag back to the 'allTags' list
+      if (!event.tag.isNew()) {
+        this.allTags.push(event.tag);
+        RecipeUtil.sortRecipeTags(this.allTags);
+      }
+
+      if (event.tag.isNew()) {
+        this.logger.finer('onTagEvent() removing tag by name');
+        this.recipe.recipeTags = this.recipe.recipeTags.filter((tag) => tag.tagName !== event.tag.tagName);
+      } else {
+        this.logger.finer('onTagEvent() removing tag by id');
+        this.recipe.recipeTags = this.recipe.recipeTags.filter((tag) => tag.id !== event.tag.id);
+      }
+    }
   }
 
   close() {
