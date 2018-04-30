@@ -31,7 +31,7 @@
             <div class="form-group form-group-sm">
               <label>Cookbook Name</label>
               <div class="form-inline">
-                <div *ngIf="showCookbooks" style="display: inline;"> <!-- TODO move the inline style to the CSS file -->
+                <div *ngIf="showCookbooks" class="cookbook-select">
                   <select class="myformcontrol input-sm" id="cookbookSelect"
                           name="cookbookSelect"
                           [(ngModel)]="cookbookTitle">
@@ -39,13 +39,13 @@
                     <option *ngFor="let cookbook of cookbookList">{{cookbook.name}}</option>
                   </select>
                 </div>
-                <div style="display: inline;"> <!-- TODO move the inline style to the CSS file -->
-                  <input type="text" class="myformcontrol input-sm" id="cookbookName" style="width: 200px;"
+                <div class="cookbook-name">
+                  <input type="text" class="myformcontrol input-sm" id="cookbookName"
                          placeholder="Or create a new cookbook"
                          name="cookbookName"
-                         [(ngModel)]="cookbookName"> <!-- TODO move the inline style to the CSS file -->
+                         [(ngModel)]="cookbookName">
                 </div>
-                <div style="display: inline;"> <!-- TODO move the inline style to the CSS file -->
+                <div class="pgnrdiv">
                   <input type="text" class="myformcontrol input-sm" id="pageNrs"
                          placeholder="page numbers"
                          name="pageNrs"
@@ -65,16 +65,14 @@
           </div>
           <div class="form-group form-group-sm">
             <label for="recipetags">Tags</label>
-            <div class="display: inline-block;"> <!-- TODO move the inline style to the CSS file -->
+            <div class="taglistdiv">
               <input class="myformcontrol input-sm" #recipeTagListRef id="recipetags"
                      list="tagDatalist"
                      name="tagInput"
-                     style="width: 150px;"
                      [(ngModel)]="recipetag"
                      (keyup)="onTagKeyUp($event)"
-                     (input)="onTagInput(recipeTagListRef.value)"> <!-- TODO move the inline style to the CSS file -->
-              <div *ngFor="let temptag of recipe.recipeTags" style="display: inline-block;">
-                <!-- TODO move the inline style to the CSS file -->
+                     (input)="onTagInput(recipeTagListRef.value)">
+              <div *ngFor="let temptag of recipe.recipeTags" class="tagsdiv">
                  <app-recipe-tag [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>
               </div>
             </div>

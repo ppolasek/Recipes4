@@ -18,6 +18,7 @@ import { SelectorDirective } from "./components/selector-directive";
 import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
 import { SearchComponent } from './components/search/search.component';
 import { RecipeTagComponent } from './components/recipe-tag/recipe-tag.component';
+import {RecipeAppEvent} from "./recipe-app-event";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { RecipeTagComponent } from './components/recipe-tag/recipe-tag.component
     },
     {provide: LoggerService, useClass: WebLoggerService},
     {provide: SelectorDirective, useClass: SelectorDirective},
+    {provide: RecipeAppEvent, useClass: RecipeAppEvent},
   ],
   bootstrap: [AppComponent]
 })

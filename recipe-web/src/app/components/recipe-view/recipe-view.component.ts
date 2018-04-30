@@ -8,6 +8,7 @@ import { tap, switchMap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import { of } from 'rxjs/observable/of';
 import "rxjs/add/operator/switchMap";
+import {RecipeAppEvent} from "../../recipe-app-event";
 
 @Component({
   selector: 'app-recipe-view',
@@ -17,7 +18,7 @@ import "rxjs/add/operator/switchMap";
 export class RecipeViewComponent implements OnInit {
   private logger: Recipes4Logger = new Recipes4Logger(this.loggerService, 'RecipeViewComponent');
 
-//  @Input()
+  @Input()
   recipe: Recipe = null;
 
   editRecipeDialogVisible: boolean = false;
@@ -27,13 +28,11 @@ export class RecipeViewComponent implements OnInit {
       private recipeService: WebRecipeService,
       private route: ActivatedRoute,
       private router: Router,
+      private recipeAppEvent: RecipeAppEvent,
   ) {}
 
   ngOnInit() {
     this.logger.fine('ngOnInit()');
-
-    // const id = +this.route.snapshot.paramMap.get('id');
-    // this.logger.fine('ngOnInit() id = ' + id);
 
     this.route.paramMap.subscribe(params => {
       this.logger.fine('ngOnInit() params.get(\'id\') = ' + params.get('id'));
@@ -61,8 +60,7 @@ export class RecipeViewComponent implements OnInit {
     this.recipeService.deleteRecipe(this.recipe.id).subscribe((success) => {
       this.logger.fine('onDeleteClick() success = ' + success);
       if (success === true) {
-        // TODO how to send notification to other components that this recipe was deleted and they need to update?
-        // _recipeEvents.recipeDeleted(recipe.id);
+        this.recipeAppEvent.recipeDeleted.next(this.recipe);
 
         this.router.navigate(['/home']);
       }

@@ -11,13 +11,12 @@
        (keyup)="onKey(box.value)"
        placeholder="Search on the recipe name or notes">
 <div class="form-group form-group-sm search-field">
-  <div class="display: inline-block;">
-    <input #recipeTagList class="form-control" id="recipetagsinput"
+  <div class="taginputdiv">
+    <input #recipeTagList class="form-control taginput" id="recipetagsinput"
            list="searchTaglist"
            name="searchTagInput"
            placeholder="Search by tags..."
-           style="width: 180px;"
-           (input)="onTagInput(recipeTagList.value)"> <!-- TODO move the inline style to the CSS file -->
+           (input)="onTagInput(recipeTagList.value)">
     <div *ngFor="let temptag of recipeTags" class="tag-list">
       <app-recipe-tag class="recipe-tag" [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>
     </div>
@@ -34,6 +33,6 @@
 </app-recipe-list>
 
 <div *ngIf="hoveredRecipe != null">
-  <hr style="border-top: 1px solid gray;"> <!-- TODO move the inline style to the CSS file -->
-  <!-- TODO <app-recipe-view id="recipeView" [recipe]="hoveredRecipe"></app-recipe-view>-->
+  <hr>
+  <app-recipe-view id="recipeView" [recipe]="hoveredRecipe"></app-recipe-view>
 </div>

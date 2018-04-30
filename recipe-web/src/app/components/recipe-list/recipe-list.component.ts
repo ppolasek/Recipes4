@@ -5,6 +5,7 @@ import { WebLoggerService } from "../../services/logger_service";
 import { SelectorDirective } from "../selector-directive";
 import { ActivatedRoute, Router } from "@angular/router";
 import {RecipeViewComponent} from "../recipe-view/recipe-view.component";
+import {RecipeAppEvent} from "../../recipe-app-event";
 
 @Component({
   selector: 'app-recipe-list',
@@ -41,7 +42,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       private loggerService: WebLoggerService,
       private selector: SelectorDirective,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private recipeAppEvent: RecipeAppEvent,
   ) {}
 
   ngOnInit() {
@@ -105,12 +107,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
           && this.selector.hoveredRecipe.id !== this.selector.lastFired.id)) {
 
         this.selector.lastFired = this.selector.hoveredRecipe;
-// TODO do we still need this:      _recipeEvents.hoverRecipe(this.selector.hoveredRecipe);
+        this.recipeAppEvent.recipeHovered.next(this.selector.hoveredRecipe);
 
-        // below doesn't cause an error with this: {path: 'hover', component: RecipeViewComponent}
-        // this.router.navigate(['/hover', { 'id': this.selector.hoveredRecipe.id } ]);
-
-        // below doesn't cause an error with this: {path: 'hover/:id', component: RecipeViewComponent},
         this.router.navigate(['hover', this.selector.hoveredRecipe.id]);
 
       } else if (this.selector.hoveredRecipe !== null) {

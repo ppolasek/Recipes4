@@ -7,6 +7,7 @@ import { WebRecipeService } from "../../services/recipe_service";
 import { WebCookbookService } from "../../services/cookbook_service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { RecipeUtil } from "../../util/recipe_util";
+import {RecipeAppEvent} from "../../recipe-app-event";
 
 @Component({
   selector: 'app-recipe-form',
@@ -76,7 +77,12 @@ export class RecipeFormComponent implements OnInit {
 
   _isNewCookbook: boolean = false;
 
-  constructor(private loggerService: WebLoggerService, private recipeService: WebRecipeService, private cookbookService: WebCookbookService) { }
+  constructor(
+      private loggerService: WebLoggerService,
+      private recipeService: WebRecipeService,
+      private cookbookService: WebCookbookService,
+      private recipeAppEvent: RecipeAppEvent,
+  ) { }
 
   ngOnInit() {
     this.logger.fine('ngOnInit()');
@@ -114,7 +120,7 @@ export class RecipeFormComponent implements OnInit {
             this.recipeSaved.emit({'recipe': updatedRecipe});
 
             // Notifies application-wide components that a recipe was updated
-            // TODO still need to figure this out: this.recipeEvents.recipeAdded(updatedRecipe.id);
+            this.recipeAppEvent.recipeAdded.next(updatedRecipe);
 
             // if the call succeeded and there was a new cookbook then
             // reload them
@@ -138,7 +144,7 @@ export class RecipeFormComponent implements OnInit {
             this.recipeSaved.emit({'recipe': updatedRecipe});
 
             // Notifies application-wide components that a recipe was updated
-            // TODO still need to figure this out: this.recipeEvents.recipeAdded(updatedRecipe.id);
+            this.recipeAppEvent.recipeUpdated.next(updatedRecipe);
 
             // if the call succeeded and there was a new cookbook then
             // reload them

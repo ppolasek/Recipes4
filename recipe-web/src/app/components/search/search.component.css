@@ -41,6 +41,14 @@ h4 {
   margin: 5px;
 }
 
+.taginputdiv {
+  display: inline-block;
+}
+
+.taginput {
+  width: 180px;
+}
+
 .tag-list {
   padding-top: 5px;
   display: inline-block;
@@ -48,4 +56,8 @@ h4 {
 
 .recipe-tag {
   margin-right: 5px;
+}
+
+hr {
+  border-top: 1px solid gray;
 }
