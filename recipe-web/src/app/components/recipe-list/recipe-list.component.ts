@@ -100,6 +100,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     if (this.enableHoverEvent) {
       // not navigating to the hover page, but showing it below the list
       // recipeHovered.emit({...this.this.selector.hoveredRecipe});
+      this.recipeAppEvent.recipeHovered.next(this.selector.hoveredRecipe);
     } else {
       if (this.selector.lastFired === null ||
         (this.selector.lastFired !== null &&
@@ -112,7 +113,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         this.router.navigate(['hover', this.selector.hoveredRecipe.id]);
 
       } else if (this.selector.hoveredRecipe !== null) {
-        this.logger.fine('_showHoveredRecipe() already fired event for $this.selector.hoveredRecipe');
+        this.logger.fine('_showHoveredRecipe() already fired event for ' + this.selector.hoveredRecipe);
       }
     }
   }
@@ -123,16 +124,19 @@ export class RecipeListComponent implements OnInit, OnDestroy {
    this.logger.finer('_showClickedRecipe() recipe = ' + recipe);
    this.logger.finer('_showClickedRecipe() this.selector.lastFired = ' + this.selector.lastFired);
 
-    // TODO finish converting this
-// //    if (recipe !== null && recipe.id !== _lastFired?.id) {
-//       this.selector.lastFired = recipe;
-//       _router.navigate(['/Detail', {'id': recipe.id.toString()}]);
-//       _recipeEvents.viewRecipe(recipe);
-// //    } else if (recipe !== null) {
-// //      this.logger.fine('_showClickedRecipe() already fired event for $recipe');
-// //    }
-  }
+    if (recipe !== null &&
+        (this.selector.lastFired === null ||
+        (this.selector.lastFired !== null && recipe.id !== this.selector.lastFired.id))) {
 
+      this.selector.lastFired = recipe;
+      this.recipeAppEvent.recipeClicked.next(recipe);
+
+      this.router.navigate(['detail', recipe.id.toString()]);
+
+    } else if (recipe !== null) {
+     this.logger.fine('_showClickedRecipe() already fired event for ' + recipe);
+   }
+  }
 
   /// The list was reloaded.
   private onRecipeListChanged() {

@@ -36,7 +36,7 @@
                           name="cookbookSelect"
                           [(ngModel)]="cookbookTitle">
                     <option value="">Select...</option>
-                    <option *ngFor="let cookbook of cookbookList">{{cookbook.name}}</option>
+                    <option *ngFor="let cookbook of cookbookList" [selected]="cookbook.name == cookbookTitle">{{cookbook.name}}</option>
                   </select>
                 </div>
                 <div class="cookbook-name">

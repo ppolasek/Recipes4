@@ -1,19 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Recipes4Logger } from "../logger/logger";
-import { WebLoggerService } from "../../services/logger_service";
-import { WebRecipeService } from "../../services/recipe_service";
-import { Recipe } from "../../models/recipe_model";
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import "rxjs/add/operator/switchMap";
+import {WebRecipeService} from "../../services/recipe_service";
+import {Recipe} from "../../models/recipe_model";
+import {WebLoggerService} from "../../services/logger_service";
+import {Recipes4Logger} from "../logger/logger";
 import {RecipeAppEvent} from "../../recipe-app-event";
 
 @Component({
-  selector: 'app-recipe-view',
-  templateUrl: './recipe-view.component.html',
-  styleUrls: ['./recipe-view.component.css']
+  selector: 'app-recipe-detail',
+  templateUrl: '../recipe-view/recipe-view.component.html',
+  styleUrls: ['../recipe-view/recipe-view.component.css']
 })
-export class RecipeViewComponent implements OnInit {
-  private logger: Recipes4Logger = new Recipes4Logger(this.loggerService, 'RecipeViewComponent');
+export class RecipeDetailComponent implements OnInit {
+  private logger: Recipes4Logger = new Recipes4Logger(this.loggerService, 'RecipeDetailComponent');
 
   @Input()
   recipe: Recipe = null;
@@ -21,11 +20,11 @@ export class RecipeViewComponent implements OnInit {
   editRecipeDialogVisible: boolean = false;
 
   constructor(
-      private loggerService: WebLoggerService,
-      private recipeService: WebRecipeService,
-      private route: ActivatedRoute,
-      private router: Router,
-      private recipeAppEvent: RecipeAppEvent,
+    private loggerService: WebLoggerService,
+    private recipeService: WebRecipeService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private recipeAppEvent: RecipeAppEvent,
   ) {}
 
   ngOnInit() {
@@ -36,7 +35,7 @@ export class RecipeViewComponent implements OnInit {
       let id = +params.get('id');
       this.logger.fine('ngOnInit() id = ' + id);
 
-      this.recipeService.getRecipe(id).subscribe(recipe => this.recipe = recipe);
+      this.recipeService.getRecipeWithHistory(id).subscribe(recipe => this.recipe = recipe);
     });
   }
 

@@ -17,7 +17,6 @@ export interface CookbookService {
 
   getAllCookbooks(): Observable<Array<Cookbook>>;
 
-  // TODO implement these
   // Future<Cookbook> getCookbookById(int cookbookId) => new Future(() => null);
   // Future<Cookbook> saveCookbook(Cookbook cookbookId) => new Future(() => null);
   // Future<Cookbook> createCookbook(Cookbook cookbookId) => new Future(() => null);

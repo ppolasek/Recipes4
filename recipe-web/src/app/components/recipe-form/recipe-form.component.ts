@@ -158,6 +158,13 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
+  isSelected(name: string): string {
+    if (name === this.cookbookTitle) {
+      return 'selected';
+    }
+    return '';
+  }
+
   /// Take the tag name from the input box if the user presses the enter key.
   onTagKeyUp(event) {
     this.logger.fine('onTagKeyUp() recipetag = ' + this.recipetag + ', event.runtimeType = ' + event.runtimeType);
@@ -276,8 +283,10 @@ export class RecipeFormComponent implements OnInit {
   }
 
   _recipeChanged() {
-    if (this._recipe !== null && this._recipe.cookbook !== null && this._recipe.cookbook.name !== null) {
-      this.cookbookTitle = this._recipe.cookbook.name;
+    this.logger.fine('_recipeChanged() recipe = ' + this.recipe);
+    if (this.recipe !== null && this.recipe.cookbook !== null && this.recipe.cookbook.name !== null) {
+      this.logger.fine('_recipeChanged() setting cookbookTitle to: ' + this.recipe.cookbook.name);
+      this.cookbookTitle = this.recipe.cookbook.name;
     }
   }
 }

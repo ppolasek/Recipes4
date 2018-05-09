@@ -70,9 +70,9 @@ export class SearchComponent implements OnInit {
 
   onRecipeHovered(event) {
     this.logger.fine('onRecipeHovered() event = $event');
-    // TODO if (event != null && event['recipe'] != null) {
-    //   hoveredRecipe = event['recipe'];
-    // }
+    if (event != null && event['recipe'] != null) {
+      this.hoveredRecipe = event['recipe'];
+    }
   }
 
   onCloseSearchClick() {

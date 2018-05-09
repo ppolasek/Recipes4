@@ -19,6 +19,7 @@ import { RecipeViewComponent } from './components/recipe-view/recipe-view.compon
 import { SearchComponent } from './components/search/search.component';
 import { RecipeTagComponent } from './components/recipe-tag/recipe-tag.component';
 import {RecipeAppEvent} from "./recipe-app-event";
+import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {RecipeAppEvent} from "./recipe-app-event";
     RecipeViewComponent,
     SearchComponent,
     RecipeTagComponent,
+    RecipeDetailComponent,
   ],
   imports: [
     BrowserModule,

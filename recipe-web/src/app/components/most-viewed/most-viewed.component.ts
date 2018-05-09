@@ -3,6 +3,7 @@ import { Recipes4Logger } from "../logger/logger";
 import { Recipe } from "../../models/recipe_model";
 import { WebLoggerService } from "../../services/logger_service";
 import { WebRecipeService } from "../../services/recipe_service";
+import {RecipeAppEvent} from "../../recipe-app-event";
 
 @Component({
   selector: 'app-most-viewed',
@@ -21,6 +22,7 @@ export class MostViewedComponent implements OnInit {
   constructor(
     private recipeService: WebRecipeService,
     private loggerService: WebLoggerService,
+    private recipeAppEvent: RecipeAppEvent,
   ) {}
 
   ngOnInit() {
@@ -33,9 +35,20 @@ export class MostViewedComponent implements OnInit {
     //   switchMap(size => this.recipeService.findAddedRecently(size))
     // );
 
+    this.fetchRecipes();
+    this.recipeAppEvent.recipeClicked.subscribe((clickedRecipe) => this.fetchRecipes());
+    this.recipeAppEvent.recipeDeleted.subscribe((deletedRecipe) => this.fetchRecipes());
+  }
+
+  ngOnDestroy() {
+    this.recipeAppEvent.recipeClicked.unsubscribe();
+    this.recipeAppEvent.recipeDeleted.unsubscribe();
+  }
+
+  private fetchRecipes() {
     this.recipeService.findMostViewed(this.listSize).subscribe(returnList => {
       this.recipes = returnList
-      this.logger.finer('MostViewedComponent.ngOnInit() this.recipes.length = ' + (this.recipes ? this.recipes.length : 'undefined'));
+      this.logger.finer('fetchRecipes() this.recipes.length = ' + (this.recipes ? this.recipes.length : 'undefined'));
     });
   }
 }
