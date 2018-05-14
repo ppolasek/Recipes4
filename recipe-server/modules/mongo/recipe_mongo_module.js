@@ -49,7 +49,7 @@ exports.recipeSearch = function (body) {
     } else {
         return Rx.Observable.of([]);
     }
-}
+};
 
 /**
  * Get a recipe by id, and update the history that it has been viewed.
@@ -58,7 +58,7 @@ exports.recipeSearch = function (body) {
 exports.getRecipeWithHistory = function (id) {
     logger.debug('recipe_mongo_module.getRecipeWithHistory() id = ' + id); // view_count_<id>
     return mydb.findByIdWithHistory(collection_recipe, id);
-}
+};
 
 /**
  * Find the most-viewed recipes, returning 'count' records.
@@ -67,7 +67,7 @@ exports.getRecipeWithHistory = function (id) {
 exports.findMostViewed = function (count) {
     logger.debug('recipe_mongo_module.findMostViewed() count = ' + count); // view_count_<id>
     return mydb.findMostViewed(collection_counters, collection_recipe, count);
-}
+};
 
 /**
  * Find the most-recently added recipes, returning 'count' records.
@@ -76,7 +76,7 @@ exports.findMostViewed = function (count) {
 exports.findAddedRecently = function (count) {
     logger.debug('recipe_mongo_module.findAddedRecently() count = ' + count);
     return mydb.findAddedRecently(collection_recipe, count);
-}
+};
 
 /**
  * Delete one recipe by its 'id'.
@@ -85,7 +85,7 @@ exports.findAddedRecently = function (count) {
 exports.deleteRecipe = function (id) {
     logger.debug('recipe_mongo_module.deleteRecipe()');
     return mydb.deleteById(collection_recipe, id);
-}
+};
 
 /**
  * Retrieve one recipe by its 'id'.
@@ -95,7 +95,7 @@ exports.deleteRecipe = function (id) {
 exports.getRecipe = function (id) {
     logger.debug('recipe_mongo_module.getRecipe()');
     return mydb.findById(collection_recipe, id);
-}
+};
 
 /**
  * Saves a new recipe to the database.
@@ -125,7 +125,7 @@ exports.saveRecipe = function (recipe) {
             logger.debug('recipe_mongo_module.saveRecipe() saving recipe');
             return _saveRecipe(recipe);
         })
-}
+};
 
 /**
  * Retrieve the entire collection of recipe tag documents.
@@ -133,7 +133,7 @@ exports.saveRecipe = function (recipe) {
 exports.getAllRecipeTags = function () {
     logger.debug('recipe_mongo_module.getAllRecipeTags()');
     return mydb.findAll(collection_recipe_tag);
-}
+};
 
 /**
  * Saves a new recipe tag document to the collection.
@@ -141,7 +141,7 @@ exports.getAllRecipeTags = function () {
  */
 exports.saveRecipeTag = function (recipeTag) {
     return _saveRecipeTag(recipeTag);
-}
+};
 
 /**
  * Checks whether the cookbook needs to be saved to the collection.
@@ -159,7 +159,7 @@ var _saveCookbook = function (cookbook) {
         logger.debug('recipe_mongo_module._saveCookbook() nothing to save; returning cookbook as-is');
         return Rx.Observable.of(cookbook);
     }
-}
+};
 
 /**
  * Saves a new recipe tag document to the collection.
@@ -177,8 +177,6 @@ var _saveRecipeTags = function (recipeTags) {
 
     logger.debug('recipe_mongo_module._saveRecipeTags() recipeTags =');
     logger.debug(recipeTags);
-
-    var updatedRecipeTags = [];
 
     var itemCnt = recipeTags.length;
     logger.debug('recipe_mongo_module._saveRecipeTags() recipe tags to process = ' + itemCnt);
@@ -236,7 +234,7 @@ var _saveRecipeTag = function (recipeTag) {
     logger.debug('recipe_mongo_module._saveRecipeTag() recipeTag:');
     logger.debug(recipeTag);
     return mydb.insertOne(collection_recipe_tag, recipeTag);
-}
+};
 
 /**
  * Insert or Update the recipe.
@@ -256,4 +254,4 @@ var _saveRecipe = function (recipe) {
 
         return mydb.updateOne(collection_recipe, query, recipe);
     }
-}
+};

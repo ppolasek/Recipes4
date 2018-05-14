@@ -33,7 +33,7 @@ export class RecipeUtil {
       whole += this.toTitleCase(part) + ' ';
     });
 
-    return whole;
+    return whole.trim();
   }
 
   static toTitleCase(text: string): string {

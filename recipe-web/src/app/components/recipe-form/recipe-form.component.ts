@@ -167,7 +167,7 @@ export class RecipeFormComponent implements OnInit {
 
   /// Take the tag name from the input box if the user presses the enter key.
   onTagKeyUp(event) {
-    this.logger.fine('onTagKeyUp() recipetag = ' + this.recipetag + ', event.runtimeType = ' + event.runtimeType);
+    this.logger.fine('onTagKeyUp() recipetag = ' + this.recipetag);
     this.logger.fine('onTagKeyUp() event.keyCode = ' + event.keyCode);
     this.logger.fine('onTagKeyUp() event.which = ' + event.which);
 

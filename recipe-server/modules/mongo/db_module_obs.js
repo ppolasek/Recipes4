@@ -382,7 +382,7 @@ exports.insertLogMessage = function (message) {
  * @param url The database URL to connect to.
  * @param logOutput Whether to log the output from this function.
  */
-    var _getMongoClient = function (url, logOutput) {
+var _getMongoClient = function (url, logOutput) {
     logOutput = typeof logOutput !== 'undefined' ? logOutput : true;
     if (logOutput) logger.debug('db_module_obs._getMongoClient() url: ' + url);
     return Rx.Observable.create(function (observer) {
@@ -405,7 +405,7 @@ exports.insertLogMessage = function (message) {
         // consumers subscribed to it and keep ConnectableObservable
         // connected as long as there is at least one consumer.
     }).publish().refCount();
-}
+};
 
 /**
  * Connect to the database, creating it if needed.
@@ -437,7 +437,7 @@ var _connect_to_db = function (client, dbname, logOutput) {
         // consumers subscribed to it and keep ConnectableObservable
         // connected as long as there is at least one consumer.
     }).publish().refCount();
-}
+};
 
 
 /**
