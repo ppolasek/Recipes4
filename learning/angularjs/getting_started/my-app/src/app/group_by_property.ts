@@ -1,21 +1,5 @@
-import { Component } from '@angular/core';
-
 import {from} from 'rxjs/observable/from';
 import {groupBy, mergeMap, toArray} from 'rxjs/operators';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  title = 'My First Angular App';
-
-  /*
-import {from} from 'rxjs/observable/from';
-import {groupBy, mergeMap, toArray} from 'rxjs/operators';
-*/
-}
 
 const people = [
     {name: 'Sue', age: 25},
@@ -37,6 +21,4 @@ const example = source.pipe(
   [{age: 30, name: "Joe"}]
   [{age: 35, name: "Sarah"}]
 */
-  const
-  subscribe = example.subscribe(val => console.log(val));
-
+const subscribe = example.subscribe(val => console.log(val));
