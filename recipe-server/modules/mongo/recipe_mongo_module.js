@@ -112,7 +112,7 @@ exports.saveRecipe = function (recipe) {
             logger.debug(updatedCookbook);
             recipe.cookbook = updatedCookbook;
         })
-        .flatMap(function (_) {
+        .switchMap(function () {
             logger.debug('recipe_mongo_module.saveRecipe() saving recipe tags');
             return _saveRecipeTags(recipe.recipeTags);
         })
@@ -121,7 +121,7 @@ exports.saveRecipe = function (recipe) {
             logger.debug(newTags);
             recipe.recipeTags = newTags;
         })
-        .flatMap(function (_) {
+        .switchMap(function () {
             logger.debug('recipe_mongo_module.saveRecipe() saving recipe');
             return _saveRecipe(recipe);
         })
@@ -181,13 +181,13 @@ var _saveRecipeTags = function (recipeTags) {
     var itemCnt = recipeTags.length;
     logger.debug('recipe_mongo_module._saveRecipeTags() recipe tags to process = ' + itemCnt);
 
-    var returnList = [];
-    var processed = 0;
-    var myerr = null;
+    // var returnList = [];
+    // var processed = 0;
+    // var myerr = null;
 
-    new Rx.Observable.from(recipeTags)
-        .flatMap(function (recipeTag) {
-            logger.debug('recipe_mongo_module._saveRecipeTags() flatMap');
+    return new Rx.Observable.from(recipeTags)
+        .switchMap(function (recipeTag) {
+            logger.debug('recipe_mongo_module._saveRecipeTags() switchMap');
             if (!('id' in recipeTag) ||
                 recipeTag.id == null ||
                 recipeTag.id < 0) {
@@ -199,32 +199,40 @@ var _saveRecipeTags = function (recipeTags) {
                 return new Rx.Observable.of(recipeTag);
             }
         })
-        .subscribe(
-            function (x) {
-                logger.debug('recipe_mongo_module._saveRecipeTags() subscribe() x:');
-                logger.debug(x);
-                returnList.push(x);
-                processed++;
-                if (processed >= itemCnt) {
-                    logger.debug('recipe_mongo_module._saveRecipeTags() subscribe() %d >= %d', processed, itemCnt);
-                    logger.debug(returnList);
-                }
-            },
-            function (err) {
-                logger.error('recipe_mongo_module._saveRecipeTags() subscribe() err: %s', err.message);
-                myerr = err;
-            }
-        );
+        .reduce(function (returnList, data, idx) {
+          logger.debug('recipe_mongo_module._saveRecipeTags() data = ' + data.toString());
+          returnList.push(data);
+          return returnList;
+          }, []);
+        // .subscribe(
+        //     function (x) {
+        //         logger.debug('recipe_mongo_module._saveRecipeTags() subscribe() x:');
+        //         logger.debug(x);
+        //         returnList.push(x);
+        //         processed++;
+        //         if (processed >= itemCnt) {
+        //             logger.debug('recipe_mongo_module._saveRecipeTags() subscribe() %d >= %d', processed, itemCnt);
+        //             logger.debug(returnList);
+        //             logger.debug('recipe_mongo_module._saveRecipeTags() after processing all recipe tags');
+        //             return new Rx.Observable.of(returnList);
+        //         }
+        //     },
+        //     function (err) {
+        //         logger.error('recipe_mongo_module._saveRecipeTags() subscribe() err: %s', err.message);
+        //         myerr = err;
+        //         return new Rx.Observable.throw(err);
+        //     }
+        // );
     
-    logger.debug('recipe_mongo_module._saveRecipeTags() after processing all recipe tags');
-
-    if (myerr != null) {
-        return new Rx.Observable.throw(err);
-    } else {
-        logger.debug(returnList);
-        return new Rx.Observable.of(returnList);
-    }
-}
+    // logger.debug('recipe_mongo_module._saveRecipeTags() after processing all recipe tags');
+    //
+    // if (myerr != null) {
+    //     return new Rx.Observable.throw(err);
+    // } else {
+    //     logger.debug(returnList);
+    //     return new Rx.Observable.of(returnList);
+    // }
+};
 
 /**
  * Saves a new recipe tag document to the collection.

@@ -16,7 +16,7 @@ var Rx = require('rxjs/Rx');
  */
 
 var db_url = null;
-var db_name = null
+var db_name = null;
 var _view_history = '_view_count_';
 var collection_logger = 'log_record';
 
@@ -115,8 +115,6 @@ exports.findMostViewed = function (collectionName, collectionForQuery, count) {
                 logger.debug('db_module_obs.findMostViewed() query2:');
                 logger.debug(query2);
 
-                var fields = {};
-
                 return _find_with_query_sort_count(client, collectionForQuery, query2, {}, limitCount);
             }
         })
@@ -137,7 +135,7 @@ exports.findMostViewed = function (collectionName, collectionForQuery, count) {
             logger.debug(finalList);
             return new Rx.Observable.of(finalList);
         });
-}
+};
 
 /**
  * Find the most recently added 'count' number of records from a collection.
@@ -172,7 +170,7 @@ exports.findAddedRecently = function (collectionName, count) {
 
             return _find_with_query_sort_count(client, collectionName, {}, mysort, limitCount);
         });
-}
+};
 
 /**
  * Delete one document in a collection.
@@ -197,7 +195,7 @@ exports.deleteById = function (collectionName, id) {
 
             return _delete_one(client, collectionName, query);
         });
-}
+};
 
 /**
  * Update one document in a collection.
@@ -222,7 +220,7 @@ exports.updateOne = function (collectionName, query, newValues) {
 
             return _update_one(client, collectionName, query, newValues);
         });
-}
+};
 
 /**
  * Retrieves a document from the given collection name matching by id,
@@ -251,7 +249,7 @@ exports.findByIdWithHistory = function (collectionName, id) {
             logger.debug(query);
             return _find_one(client, collectionName, query);
         });
-}
+};
 
 /**
  * Retrieves a document from the given collection name matching by id.
@@ -277,7 +275,7 @@ exports.findById = function (collectionName, id) {
 
             return _find_one(client, collectionName, query);
         });
-}
+};
 
 /**
  * Retrieve all documents from the given collection name.
@@ -297,7 +295,7 @@ exports.findAll = function (collectionName) {
         .flatMap(function (_) {
             return _find_all(client, collectionName);
         });
-}
+};
 
 /**
  * Insert one document into the given collection name.
@@ -319,13 +317,13 @@ exports.insertOne = function (collectionName, someobj) {
             logger.debug('db_module_obs.insertOne() theclient = ' + theclient);
             client = theclient;
         })
-        .flatMap(function (_) {
+        .switchMap(function (_) {
             return _update_id(client, collectionName, someobj);
         })
-        .flatMap(function (updatedObj) {
+        .switchMap(function (updatedObj) {
             return _insert_one(client, collectionName, updatedObj);
         });
-}
+};
 
 /**
  * Insert a message into the log_record collection.
@@ -369,7 +367,7 @@ exports.insertLogMessage = function (message) {
                 });
             })
         });
-}
+};
 
 // ------------------------------------------------------------------------------------------------
 //
@@ -478,7 +476,7 @@ var _find_with_query_sort_count = function (client, collectionName, query, mysor
                 });
             });
         });
-}
+};
 
 /**
  * Update one document in a collection.
@@ -521,7 +519,7 @@ var _update_one = function (client, collectionName, query, newValues) {
                 });
             });
         });
-}
+};
 
 /**
  * Perform the collection operation to find one record.
@@ -558,7 +556,7 @@ var _delete_one = function (client, collectionName, query) {
                 });
             });
         });
-}
+};
 
 /**
  * Perform the collection operation to find one record.
@@ -588,7 +586,7 @@ var _find_one = function (client, collectionName, query) {
                 });
         });
     });
-}
+};
 
 /**
  * Perform the collection operation to find all records.
@@ -614,7 +612,7 @@ var _find_all = function (client, collectionName) {
                 });
         });
     });
-}
+};
 
 /**
  * Update the viewing history for a collection and specific id. This does not
@@ -656,7 +654,7 @@ var _update_history_sequence = function(client, collectionName, id) {
                 });
             });
         });
-}
+};
 
 /**
  * Update the 'id' and '_id' property of 'someobj'.
@@ -697,7 +695,7 @@ var _update_id = function(client, collectionName, someobj) {
     } else {
         return Rx.Observable.of(someobj);
     }
-}
+};
 
 /**
  * Perform the operation to insert the record.
@@ -732,7 +730,7 @@ var _insert_one = function (client, collectionName, someobj) {
                 });
             });
         });
-}
+};
 
  /**
   * Update the 'updatedOn' date.
@@ -741,7 +739,7 @@ var _insert_one = function (client, collectionName, someobj) {
      if ('updatedOn' in obj) {
          obj.updatedOn = new Date();
      }
- }
+ };
 
  /**
   * Update the 'createdOn' date.
@@ -750,7 +748,7 @@ var _insert_one = function (client, collectionName, someobj) {
      if ('createdOn' in obj) {
          obj.createdOn = new Date();
      }
- }
+ };
 
  /**
   * Update the 'version' count.
@@ -761,4 +759,4 @@ var _insert_one = function (client, collectionName, someobj) {
      } else {
          obj.version = 0;
      }
- }
+ };
