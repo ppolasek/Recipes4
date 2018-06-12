@@ -19,6 +19,7 @@ var db_url = null;
 var db_name = null;
 var _view_history = '_view_count_';
 var collection_logger = 'log_record';
+var collection_cookbook = 'cookbook';
 
 /**
  * Find documents in a collection.
@@ -55,7 +56,7 @@ exports.findWithQuerySortCount = function (collectionName, query, mysort, count)
 
             return _find_with_query_sort_count(client, collectionName, query, mysort, limitCount);
         });
-}
+};
 
 /**
  * Find the most viewed 'count' number of records from a collection.
@@ -290,6 +291,7 @@ exports.findAll = function (collectionName) {
     var client;
     return _getMongoClient(db_url)
         .do(function (theclient) {
+            logger.debug('db_module_obs.findAll() theclient = ' + theclient);
             client = theclient;
         })
         .flatMap(function (_) {
@@ -312,15 +314,15 @@ exports.insertOne = function (collectionName, someobj) {
     logger.debug(someobj);
 
     var client;
+    var insertedObj;
+    
     return _getMongoClient(db_url)
-        .do(function (theclient) {
+        .flatMap(function (theclient) {
             logger.debug('db_module_obs.insertOne() theclient = ' + theclient);
             client = theclient;
-        })
-        .switchMap(function (_) {
             return _update_id(client, collectionName, someobj);
         })
-        .switchMap(function (updatedObj) {
+        .flatMap(function (updatedObj) {
             return _insert_one(client, collectionName, updatedObj);
         });
 };
@@ -362,6 +364,7 @@ exports.insertLogMessage = function (message) {
                     } else {
                         // logger.debug('db_module_obs.insertLogMessage() inserted a record');
                         observer.next(null, null);
+                        observer.complete();
                         client.close();
                     }
                 });
@@ -386,10 +389,13 @@ var _getMongoClient = function (url, logOutput) {
     return Rx.Observable.create(function (observer) {
         new MongoClient(url).connect(function (err, client) {
             if (err) {
+                console.log('db_module_obs._getMongoClient() ERROR: ' + err);
+                logger.error('db_module_obs._getMongoClient() ERROR: ' + err);
                 observer.error(err);
             } else {
-                if (logOutput) logger.debug('db_module_obs._getMongoClient() client: ' + client);
+                if (logOutput) logger.debug('db_module_obs._getMongoClient() client = ' + client);
                 observer.next(client);
+                observer.complete();
             }
         });
         // publish():
@@ -420,6 +426,7 @@ var _connect_to_db = function (client, dbname, logOutput) {
             var db = client.db(dbname);
             // logger.debug('db_module_obs._connect_to_db() db: ' + db);
             observer.next(db);
+            observer.complete();
         } catch (err) {
             logger.error('db_module_obs caught error: ' + err);
             observer.error(err);
@@ -471,6 +478,7 @@ var _find_with_query_sort_count = function (client, collectionName, query, mysor
                         } else {
                             observer.next(null);
                         }
+                        observer.complete();
                     }
                     client.close();
                 });
@@ -514,6 +522,7 @@ var _update_one = function (client, collectionName, query, newValues) {
                         logger.debug('db_module_obs._update_one newValues after update:');
                         logger.debug(newValues);
                         observer.next(newValues);
+                        observer.complete();
                     }
                     client.close();
                 });
@@ -547,6 +556,7 @@ var _delete_one = function (client, collectionName, query) {
 
                         if (result.result.ok > 0 && result.result.n > 0) {
                             observer.next(true);
+                            observer.complete();
                         } else {
                             // if no record was deleted then throw an exception instead
                             observer.error(new Error('No ' + collectionName + ' record found for id: ' + query.id), null);
@@ -582,6 +592,7 @@ var _find_one = function (client, collectionName, query) {
                     } else {
                         observer.next(result);
                     }
+                    observer.complete();
                     client.close();
                 });
         });
@@ -608,6 +619,7 @@ var _find_all = function (client, collectionName) {
                     } else {
                         observer.next(result);
                     }
+                    observer.complete();
                     client.close();
                 });
         });
@@ -650,6 +662,7 @@ var _update_history_sequence = function(client, collectionName, id) {
                            // logger.debug('db_module_obs._update_history_sequence() it worked - done');
                            // observer.next(someobj);
                             observer.next();
+                            observer.complete();
                         }
                 });
             });
@@ -688,6 +701,7 @@ var _update_id = function(client, collectionName, someobj) {
 
                                 logger.debug('db_module_obs._update_id() it worked - done');
                                 observer.next(someobj);
+                                observer.complete();
                             }
                     });
                 });
@@ -722,9 +736,10 @@ var _insert_one = function (client, collectionName, someobj) {
                     } else {
                         // logger.debug('db_module_obs._insert_one() ' + res.insertedCount + ' document inserted');
                         // logger.debug('db_module_obs._insert_one() returning:');
-                        // logger.debug(res.ops[0]);
+                        logger.debug(res.ops[0]);
                         logger.debug('db_module_obs._insert_one() object inserted');
                         observer.next(res.ops[0]);
+                        observer.complete();
                     }
                     client.close();
                 });
@@ -737,6 +752,10 @@ var _insert_one = function (client, collectionName, someobj) {
   */
  var _update_updated_on = function (obj) {
      if ('updatedOn' in obj) {
+         logger.debug('_update_updated_on() "updated on" updated to today\'s date');
+         obj.updatedOn = new Date();
+     } else {
+         logger.debug('_update_updated_on() "updated on" inserted with today\'s date');
          obj.updatedOn = new Date();
      }
  };
@@ -746,6 +765,10 @@ var _insert_one = function (client, collectionName, someobj) {
   */
  var _update_created_on = function (obj) {
      if ('createdOn' in obj) {
+         logger.debug('_update_created_on() "created on" updated to today\'s date');
+         obj.createdOn = new Date();
+     } else {
+         logger.debug('_update_created_on() "created on" inserted with today\'s date');
          obj.createdOn = new Date();
      }
  };
@@ -755,8 +778,10 @@ var _insert_one = function (client, collectionName, someobj) {
   */
  var _update_version = function (obj) {
      if ('version' in obj && Number.isInteger(obj.version)) {
+         logger.debug('_update_version() "version" incremented to ' + (obj.version + 1));
          obj.version = obj.version + 1;
      } else {
+         logger.debug('_update_version() "version" set to 0');
          obj.version = 0;
      }
  };

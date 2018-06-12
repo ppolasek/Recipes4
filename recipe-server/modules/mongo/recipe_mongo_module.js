@@ -112,16 +112,15 @@ exports.saveRecipe = function (recipe) {
             logger.debug(updatedCookbook);
             recipe.cookbook = updatedCookbook;
         })
-        .switchMap(function () {
+        .flatMap(function () {
             logger.debug('recipe_mongo_module.saveRecipe() saving recipe tags');
             return _saveRecipeTags(recipe.recipeTags);
         })
-        .do(function (newTags) {
+        .flatMap(function (newTags) {
             logger.debug('recipe_mongo_module.saveRecipe() after updating tags:');
             logger.debug(newTags);
             recipe.recipeTags = newTags;
-        })
-        .switchMap(function () {
+
             logger.debug('recipe_mongo_module.saveRecipe() saving recipe');
             return _saveRecipe(recipe);
         })
@@ -167,7 +166,7 @@ var _saveCookbook = function (cookbook) {
  */
 var _saveRecipeTags = function (recipeTags) {
     logger.debug('recipe_mongo_module._saveRecipeTags() processing recipe tags');
-
+    
     // since the recipe tags are kept with the recipe now, new tags must be inserted first
     if (recipeTags == null ||
         !Array.isArray(recipeTags) || recipeTags.length <= 0) {
@@ -181,57 +180,29 @@ var _saveRecipeTags = function (recipeTags) {
     var itemCnt = recipeTags.length;
     logger.debug('recipe_mongo_module._saveRecipeTags() recipe tags to process = ' + itemCnt);
 
-    // var returnList = [];
-    // var processed = 0;
-    // var myerr = null;
-
-    return new Rx.Observable.from(recipeTags)
-        .switchMap(function (recipeTag) {
-            logger.debug('recipe_mongo_module._saveRecipeTags() switchMap');
+    return Rx.Observable.from(recipeTags)
+        .flatMap(function (recipeTag) {
+            logger.debug('recipe_mongo_module._saveRecipeTags() flatMap');
             if (!('id' in recipeTag) ||
                 recipeTag.id == null ||
                 recipeTag.id < 0) {
                 logger.debug('recipe_mongo_module._saveRecipeTags() inserting tag:');
                 logger.debug(recipeTag);
+                
                 return _saveRecipeTag(recipeTag);
             } else {
                 logger.debug('recipe_mongo_module._saveRecipeTags() keeping tag as is: ' + recipeTag.tagName);
                 return new Rx.Observable.of(recipeTag);
             }
         })
-        .reduce(function (returnList, data, idx) {
+        .reduce(function (returnList, data) {
           logger.debug('recipe_mongo_module._saveRecipeTags() data = ' + data.toString());
+          // logger.debug('recipe_mongo_module._saveRecipeTags() typeof data = ' + (typeof data));
           returnList.push(data);
+          // logger.debug('recipe_mongo_module._saveRecipeTags() returnList = ' + returnList);
+          logger.debug('recipe_mongo_module._saveRecipeTags() returnList instanceof Array = ' + (returnList instanceof Array).toString());
           return returnList;
-          }, []);
-        // .subscribe(
-        //     function (x) {
-        //         logger.debug('recipe_mongo_module._saveRecipeTags() subscribe() x:');
-        //         logger.debug(x);
-        //         returnList.push(x);
-        //         processed++;
-        //         if (processed >= itemCnt) {
-        //             logger.debug('recipe_mongo_module._saveRecipeTags() subscribe() %d >= %d', processed, itemCnt);
-        //             logger.debug(returnList);
-        //             logger.debug('recipe_mongo_module._saveRecipeTags() after processing all recipe tags');
-        //             return new Rx.Observable.of(returnList);
-        //         }
-        //     },
-        //     function (err) {
-        //         logger.error('recipe_mongo_module._saveRecipeTags() subscribe() err: %s', err.message);
-        //         myerr = err;
-        //         return new Rx.Observable.throw(err);
-        //     }
-        // );
-    
-    // logger.debug('recipe_mongo_module._saveRecipeTags() after processing all recipe tags');
-    //
-    // if (myerr != null) {
-    //     return new Rx.Observable.throw(err);
-    // } else {
-    //     logger.debug(returnList);
-    //     return new Rx.Observable.of(returnList);
-    // }
+        }, []);
 };
 
 /**
