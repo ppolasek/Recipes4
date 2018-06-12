@@ -63,23 +63,23 @@
                      [(ngModel)]="recipe.recipeUrl">
             </div>
           </div>
-          <div class="form-group form-group-sm">
-            <label for="recipetags">Tags</label>
-            <div class="taglistdiv">
-              <input class="myformcontrol input-sm" #recipeTagListRef id="recipetags"
-                     list="tagDatalist"
-                     name="tagInput"
-                     [(ngModel)]="recipetag"
-                     (keyup)="onTagKeyUp($event)"
-                     (input)="onTagInput(recipeTagListRef.value)">
-              <div *ngFor="let temptag of recipe.recipeTags" class="tagsdiv">
-                 <app-recipe-tag [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>
-              </div>
-            </div>
-            <datalist id="tagDatalist">
-              <option *ngFor="let tag of allTags" value="{{ tag.tagName }}"></option>
-            </datalist>
-          </div>
+          <!--<div class="form-group form-group-sm">-->
+            <!--<label for="recipetags">Tags</label>-->
+            <!--<div class="taglistdiv">-->
+              <!--<input class="myformcontrol input-sm" #recipeTagListRef id="recipetags"-->
+                     <!--list="tagDatalist"-->
+                     <!--name="tagInput"-->
+                     <!--[(ngModel)]="recipetag"-->
+                     <!--(keyup)="onTagKeyUp($event)"-->
+                     <!--(input)="onTagInput(recipeTagListRef.value)">-->
+              <!--<div *ngFor="let temptag of recipe.recipeTags" class="tagsdiv">-->
+                 <!--<app-recipe-tag [tag]="temptag" (tagEvent)="onTagEvent($event)"></app-recipe-tag>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<datalist id="tagDatalist">-->
+              <!--<option *ngFor="let tag of allTags" value="{{ tag.tagName }}"></option>-->
+            <!--</datalist>-->
+          <!--</div>-->
           <div class="form-group form-group-sm">
             <label for="notes">Notes</label>
             <textarea class="myformcontrol input-sm" rows="4" id="notes"
