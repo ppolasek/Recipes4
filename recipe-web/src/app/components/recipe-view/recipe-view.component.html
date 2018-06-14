@@ -14,14 +14,14 @@
     <span class="page-nrs" *ngIf="recipe.pageNrs != null">Page nrs. </span>
     <span>{{ recipe.pageNrs }}</span>
   </div>
-  <!--<div class="inline-div">-->
-    <!--<h4 *ngIf="recipe.recipeTags != null && recipe.recipeTags.length > 0">Tags</h4>-->
-  <!--</div>-->
-  <!--<div class="tags-row">-->
-    <!--<div *ngFor="let temptag of recipe.recipeTagsSorted; let idx = index" class="inline-div"><span-->
-      <!--*ngIf="idx > 0">, </span>{{ temptag.tagName }}-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="inline-div">
+    <h4 *ngIf="recipe.recipeTags != null && recipe.recipeTags.length > 0">Tags</h4>
+  </div>
+  <div class="tags-row">
+    <div *ngFor="let temptag of recipe.recipeTagsSorted; let idx = index" class="inline-div"><span
+      *ngIf="idx > 0">, </span>{{ temptag.tagName }}
+    </div>
+  </div>
   <div class="inline-div">
     <h4 *ngIf="recipe.notes != null">Notes</h4>
   </div>
