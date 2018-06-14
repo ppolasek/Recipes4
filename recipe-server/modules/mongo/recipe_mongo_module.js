@@ -23,7 +23,7 @@ exports.recipeSearch = function (body) {
         var orList = [];
 
         // search on 'searchText': String
-        if ('searchText' in body && body.searchText != null) {
+        if ('searchText' in body && body.searchText.length > 0) {
             var txtRegEx = new RegExp(body.searchText, "i");
             logger.debug('recipe_mongo_module.recipeSearch() txtRegEx = ' + txtRegEx.toString());
 
