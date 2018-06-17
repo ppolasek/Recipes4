@@ -1,27 +1,33 @@
-# RecipeWeb
+# My Favorite Recipes 4
+Organize all your favorite recipes!
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+Keep track of:
+1. which cookbook your recipe is in and the page number
+2. or the URL to your favorite recipe
+4. Notes on what the heck went wrong, or what you had to change
+    1. e.g. used different ingredients, or how much
 
-## Development server
+## Technology
+Recipes4 uses Node.js with MongoDb and ReactiveX for the backend services,
+and the web front-end is using Angular + Typescript and ReactiveX.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This project was created to demonstrate my use of Angular + Typescript and ReactiveX in the UI,
+and converting the recipe-server from callback hell to using ReactiveX.
 
-## Code scaffolding
+## Getting Started
+#### Server Install
+1. Note: this does require a working install of MongoDb at port 27017  
+1. Open a terminal window and navigate to Recipes4/recipe-server/  
+1. Type 'npm install'
+#### Web Install
+1. Open a second terminal window and navigate to Recipes4/recipe-web/  
+1. Type 'npm install'
+#### Server Start
+1. Return to the recipe-server terminal and type 'npm start'
+1. If desired, tail the log file recipe-server/logs/recipe_server.log
+#### Web Start
+1. Return to the recipe-web terminal and type 'npm start'
+1. In a browser window enter the URL http://localhost:4200/
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### See LICENSE
