@@ -63,9 +63,11 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
     // need to keep track of the recipe being hovered over, so it can be displayed when the timer fires off
     if (this.recipeList !== null) {
-      this.selector.hoveredRecipe = this.recipeList.find(function (temp) {
-        return temp.id === this;
-      }, id);
+      // ERROR src/app/components/recipe-list/recipe-list.component.ts(68,16): error TS2365: Operator '===' cannot be applied to types 'number' and 'void'.
+      // this.selector.hoveredRecipe = this.recipeList.find(function (temp) {
+      //   return temp.id === this;
+      // }, id);
+      this.selector.hoveredRecipe = this.recipeList.find(temp => temp.id === id);
       this.logger.finest('onMouseOver() hoveredRecipe = ' + this.selector.hoveredRecipe);
     }
   }
@@ -82,9 +84,11 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.selector.subscription.unsubscribe();
 
     if (this.recipeList !== null) {
-      this.selector.clickedRecipe = this.recipeList.find(function (temp) {
-        return temp.id === this;
-      }, id);
+      // ERROR src/app/components/recipe-list/recipe-list.component.ts(88,16): error TS2365: Operator '===' cannot be applied to types 'number' and 'void'.
+      // this.selector.clickedRecipe = this.recipeList.find(function (temp) {
+      //   return temp.id === this;
+      // }, id);
+      this.selector.clickedRecipe = this.recipeList.find(temp => temp.id === id);
       this.logger.finest('onMouseClick() _clickedRecipe = ' + this.selector.clickedRecipe);
       this.selector.hoveredRecipe = null;
       this.showClickedRecipe(this.selector.clickedRecipe);

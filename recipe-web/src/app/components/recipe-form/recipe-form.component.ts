@@ -186,14 +186,19 @@ export class RecipeFormComponent implements OnInit {
 
   /// Fires when an input value appears, but ignore those not in the dropdown
   /// list, as those are manual entries from the keyboard.
-  onTagInput(inputvalue) {
+  onTagInput(inputvalue: string) {
     this.logger.fine('onTagInput() inputvalue = ' + inputvalue);
 
     if (this.allTags !== null && this.allTags.length > 0) {
 
-      let tempTag = this.allTags.find(function (rtag) {
-          return rtag.tagName === this;
-      }, inputvalue);
+      // ERROR in src/app/components/recipe-form/recipe-form.component.ts(196,18): error TS2365: Operator '===' cannot be applied to types 'string' and 'void'.
+      // let tempTag = this.allTags.find(function (rtag) {
+      //   if (this instanceof String) {
+      //     return rtag.tagName === this;
+      //   }
+      //   return false;
+      // }, inputvalue);
+      let tempTag = this.allTags.find(rtag => rtag.tagName === inputvalue);
 
       this.logger.fine('onTagInput() tempTag = ' + tempTag);
 
@@ -267,9 +272,11 @@ export class RecipeFormComponent implements OnInit {
 
   _cookbookTitleChanged() {
     if (this.cookbookList !== undefined && this.cookbookList !== null && this.cookbookList.length > 0 && this.cookbookTitle !== null && this.cookbookTitle.length > 0) {
-      let cookbook = this.cookbookList.find(function (cookbook) {
-        return cookbook.name === this;
-      }, this.cookbookTitle); // See Also: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+      // ERROR src/app/components/recipe-form/recipe-form.component.ts(276,16): error TS2365: Operator '===' cannot be applied to types 'string' and 'void'.
+      // let cookbook = this.cookbookList.find(function (cookbook) {
+      //   return cookbook.name === this;
+      // }, this.cookbookTitle); // See Also: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+      let cookbook = this.cookbookList.find(cookbook => cookbook.name === this.cookbookTitle);
       this.logger.fine('_cookbookTitleChanged() cookbook = ' + cookbook);
       this.recipe.cookbook = cookbook;
     }

@@ -4,7 +4,6 @@ import { WebLoggerService } from "../../services/logger_service";
 import { WebRecipeService } from "../../services/recipe_service";
 import { Recipe } from "../../models/recipe_model";
 import {ActivatedRoute, Router} from "@angular/router";
-import "rxjs/add/operator/switchMap";
 import {RecipeAppEvent} from "../../recipe-app-event";
 
 @Component({

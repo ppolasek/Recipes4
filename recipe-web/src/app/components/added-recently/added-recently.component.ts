@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
-import { Observable} from "rxjs/Observable";
+import { Observable} from "rxjs";
 import { tap, filter, map, switchMap, withLatestFrom} from "rxjs/operators";
 
 import { Recipe} from "../../models/recipe_model";

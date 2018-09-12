@@ -7,7 +7,7 @@ import {Recipes4Logger} from "../components/logger/logger";
 import {HttpClient} from "@angular/common/http";
 import {Recipes4AppConfig} from "../models/model";
 import {Cookbook} from "../models/cookbook_model";
-import {Observable} from "rxjs/Observable";
+import {Observable} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 import {WebLoggerService} from "./logger_service";
 

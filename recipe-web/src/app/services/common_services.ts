@@ -1,11 +1,11 @@
+
+import {throwError as observableThrowError,  Observable ,  of } from 'rxjs';
 // Copyright (c) 2018, ppolasek. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import { Recipes4AppConfig } from "../models/model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Recipes4Logger } from "../components/logger/logger";
-import { Observable } from "rxjs/Observable";
-import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from "rxjs/operators";
 import { WebLoggerService } from "./logger_service";
 
@@ -68,10 +68,10 @@ export class WebService {
             if (response !== null && response.result.ok === 'yes') {
               return of(response.return_obj[0]); // the response value comes back in an Array
             } else if (response !== null && response.result.ok === 'no') {
-              return Observable.throw(response.err);
+              return observableThrowError(response.err);
             } else {
               this.logger.severe('makeTheCall() bad response %o', response);
-              return Observable.throw('makeTheCall() bad response. response = ' + response.toString());
+              return observableThrowError('makeTheCall() bad response. response = ' + response.toString());
             }
           }),
           catchError(this.handleError<any>(method))

@@ -3,8 +3,7 @@
 
 import {Injectable} from "@angular/core";
 import {Recipe} from "../models/recipe_model";
-import {Subscription} from "rxjs/Subscription";
-import { timer } from "rxjs/observable/timer";
+import {Subscription,  timer } from "rxjs";
 
 /// Keeps track of which recipe has been hovered over and clicked on, as only one
 /// may be selected at a time across multiple lists. This will be treated as a

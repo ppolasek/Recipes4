@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { LogModel } from "../models/logger_model";
 import { Recipes4AppConfig } from "../models/model";
 import { Injectable } from "@angular/core";

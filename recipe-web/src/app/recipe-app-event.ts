@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import {Injectable} from "@angular/core";
-import {Subject} from "rxjs/Subject";
+import {Subject} from "rxjs";
 import {Recipe} from "./models/recipe_model";
 
 @Injectable()
