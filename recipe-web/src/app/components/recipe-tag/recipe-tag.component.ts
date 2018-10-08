@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {WebLoggerService} from "../../services/logger_service";
-import {Recipes4Logger} from "../logger/logger";
-import {RecipeTag, RecipeTagEventType} from "../../models/recipe_model";
+import {Recipes4Logger, WebLoggerService} from "@app/core";
+import {RecipeTag, RecipeTagEventType} from "@app/models";
 import {RecipeTagEvent} from "./recipe-tag-event";
 
 @Component({

@@ -1,12 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { Recipes4Logger } from "../logger/logger";
 import { timer , Subject} from "rxjs";
-import { SelectorDirective } from "../selector-directive";
-import { WebLoggerService } from "../../services/logger_service";
-import { WebRecipeService } from "../../services/recipe_service";
 import {debounceTime, distinctUntilChanged, tap} from "rxjs/operators";
-import {Recipe, RecipeTag, RecipeTagEventType, SearchCriteria} from "../../models/recipe_model";
+
+import { SelectorDirective } from "../selector-directive";
+import { Recipes4Logger, WebRecipeService, WebLoggerService } from "@app/core";
+import {Recipe, RecipeTag, RecipeTagEventType, SearchCriteria} from "@app/models";
 import {RecipeTagEvent} from "../recipe-tag/recipe-tag-event";
 import { RecipeUtil } from "../../util/recipe_util";
 

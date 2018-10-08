@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Recipes4Logger } from "../logger/logger";
-import { WebLoggerService } from "../../services/logger_service";
-import { Recipe } from "../../models/recipe_model";
+
+import { Recipes4Logger, WebLoggerService } from "@app/core";
 
 @Component({
   selector: 'app-dialog',

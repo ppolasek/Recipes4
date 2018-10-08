@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Recipe } from "../../models/recipe_model";
-import { Recipes4Logger } from "../logger/logger";
-import { WebLoggerService } from "../../services/logger_service";
-import { SelectorDirective } from "../selector-directive";
 import { ActivatedRoute, Router } from "@angular/router";
+
+import { Recipe } from "@app/models";
+import { Recipes4Logger, WebLoggerService } from "@app/core";
+
+import { SelectorDirective } from "../selector-directive";
 import {RecipeViewComponent} from "../recipe-view/recipe-view.component";
 import {RecipeAppEvent} from "../../recipe-app-event";
 

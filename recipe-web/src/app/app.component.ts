@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BrowserModule } from "@angular/platform-browser";
-import { AppRoutingModule } from "./app-routing.module";
-import { WebLoggerService } from "./services/logger_service";
-import { Recipes4Logger } from "./components/logger/logger";
-import { tap } from "rxjs/operators";
-import { CookbookService, WebCookbookService } from "./services/cookbook_service";
-import { WebRecipeService } from "./services/recipe_service";
-import {DialogComponent} from "./components/dialog/dialog.component";
+
+import { WebCookbookService, Recipes4Logger, WebLoggerService, WebRecipeService } from "@app/core";
 
 @Component({
   selector: 'recipes4',
@@ -21,7 +15,7 @@ export class AppComponent implements OnInit {
 
   showAddRecipeDialog: boolean = false;
 
-  constructor(private loggerService: WebLoggerService, private cookbookService: WebCookbookService) {}
+  constructor(private loggerService: WebLoggerService) {}
 
   ngOnInit() {
     this.logger.fine('ngOnInit()');

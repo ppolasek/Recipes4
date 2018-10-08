@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Recipes4Logger } from "../logger/logger";
-import { Recipe } from "../../models/recipe_model";
-import { WebLoggerService } from "../../services/logger_service";
-import { WebRecipeService } from "../../services/recipe_service";
-import {RecipeAppEvent} from "../../recipe-app-event";
+
+import { Recipe } from "@app/models";
+import { Recipes4Logger, WebLoggerService, WebRecipeService } from "@app/core";
+import { RecipeAppEvent } from "../../recipe-app-event";
 
 @Component({
   selector: 'app-most-viewed',

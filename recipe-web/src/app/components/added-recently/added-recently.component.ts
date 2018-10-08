@@ -1,13 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
-import { Observable} from "rxjs";
-import { tap, filter, map, switchMap, withLatestFrom} from "rxjs/operators";
-
-import { Recipe} from "../../models/recipe_model";
-import { RecipeService, WebRecipeService } from "../../services/recipe_service";
-import { Recipes4Logger } from "../logger/logger";
-import { WebLoggerService } from "../../services/logger_service";
-import {RecipeAppEvent} from "../../recipe-app-event";
+import { Recipe} from "@app/models";
+import { WebLoggerService, Recipes4Logger, WebRecipeService } from "@app/core";
+import { RecipeAppEvent } from "../../recipe-app-event";
 
 @Component({
   selector: 'app-added-recently',

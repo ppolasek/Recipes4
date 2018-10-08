@@ -1,21 +1,25 @@
-
-import {throwError as observableThrowError,  Observable ,  of } from 'rxjs';
 // Copyright (c) 2018, ppolasek. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import { Recipes4AppConfig } from "../models/model";
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Recipes4Logger } from "../components/logger/logger";
 import { catchError, map, tap } from "rxjs/operators";
-import { WebLoggerService } from "./logger_service";
+import {throwError as observableThrowError,  Observable ,  of } from 'rxjs';
+
+import { Recipes4AppConfig } from "@app/models";
+import { Recipes4Logger, WebLoggerService } from "@app/core";
 
 // -------------------- WebService methods -------------------- //
 
 //
-/// Base class for all webservices
+/// Base class for all WebServicess
 ///
 
+@Injectable({
+  providedIn: 'root'
+})
 export class WebService {
+
   private logger: Recipes4Logger = new Recipes4Logger(this.loggerService, 'WebService');
 
   readonly _options = {headers: new HttpHeaders({'Content-Type': 'application/json'})};

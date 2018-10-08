@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Recipes4Logger } from "../logger/logger";
-import { WebLoggerService } from "../../services/logger_service";
-import { WebRecipeService } from "../../services/recipe_service";
-import { Recipe } from "../../models/recipe_model";
 import {ActivatedRoute, Router} from "@angular/router";
+
+import { Recipes4Logger, WebLoggerService, WebRecipeService } from "@app/core";
+import { Recipe } from "@app/models";
 import {RecipeAppEvent} from "../../recipe-app-event";
 
 @Component({

@@ -7,7 +7,7 @@ import { DefaultViewComponent } from './components/default-view/default-view.com
 import { AddedRecentlyComponent } from './components/added-recently/added-recently.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
 import { Recipes4AppConfig } from "./models/model";
-import { LoggerService, WebLoggerService } from "./services/logger_service";
+import { LoggerService, WebLoggerService } from "@app/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 import { MostViewedComponent } from './components/most-viewed/most-viewed.component';
@@ -18,7 +18,7 @@ import { SelectorDirective } from "./components/selector-directive";
 import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
 import { SearchComponent } from './components/search/search.component';
 import { RecipeTagComponent } from './components/recipe-tag/recipe-tag.component';
-import {RecipeAppEvent} from "./recipe-app-event";
+import { RecipeAppEvent } from "./recipe-app-event";
 import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.component';
 
 @NgModule({
