@@ -7,7 +7,8 @@ import { catchError, map, tap } from "rxjs/operators";
 import {throwError as observableThrowError,  Observable ,  of } from 'rxjs';
 
 import { Recipes4AppConfig } from "@app/models";
-import { Recipes4Logger, WebLoggerService } from "@app/core";
+import { WebLoggerService } from "../logger/logger.service";
+import { Recipes4Logger } from "../logger/logger";
 
 // -------------------- WebService methods -------------------- //
 

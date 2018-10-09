@@ -7,7 +7,9 @@ import {Observable} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 
 import {Cookbook, Recipes4AppConfig} from "@app/models";
-import { Recipes4Logger, WebService, WebLoggerService} from "@app/core";
+import { WebService } from "../common/common.service";
+import { WebLoggerService } from "../logger/logger.service";
+import { Recipes4Logger } from "../logger/logger";
 
 /// CookbookService interface definition
 ///

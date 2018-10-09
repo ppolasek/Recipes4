@@ -1,12 +1,15 @@
 // Copyright (c) 2018, ppolasek. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import { Observable } from "rxjs";
-import { Recipe, RecipeTag, SearchCriteria, Recipes4AppConfig } from "@app/models";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
-import {WebService, WebLoggerService, Recipes4Logger } from "@app/core";
+
+import { Recipe, RecipeTag, SearchCriteria, Recipes4AppConfig } from "@app/models";
+import { WebService } from "../common/common.service";
+import { WebLoggerService } from "../logger/logger.service";
+import { Recipes4Logger } from "../logger/logger";
 
 /// RecipeService interface definition
 ///
