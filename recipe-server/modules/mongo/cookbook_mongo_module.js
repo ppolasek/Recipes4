@@ -23,7 +23,7 @@ var collection_cookbook = 'cookbook';
  */
 exports.getCookbookById = function (id) {
     return mydb.findById(collection_cookbook, id);
-}
+};
 
 /**
  * Retrieve all cookbooks.
@@ -31,7 +31,7 @@ exports.getCookbookById = function (id) {
 exports.getAllCookbooks = function () {
     logger.debug('cookbook_mongo_module.getAllCookbooks()');
     return mydb.findAll(collection_cookbook);
-}
+};
 
 /**
  * Saves a new cookbook to the database.
@@ -41,4 +41,4 @@ exports.saveCookbook = function (cookbook) {
     logger.debug('cookbook_mongo_module.saveCookbook() cookbook:');
     logger.debug(cookbook);
     return mydb.insertOne(collection_cookbook, cookbook);
-}
+};

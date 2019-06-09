@@ -5,7 +5,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "node recipes4.js",
+    "start:recipes-server": "node recipes4.js",
+    "start:mongodb": "mongod --dbpath=./data --port 27017",
+    "start:json-server": "json-server --watch db.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Philip Polasek",
@@ -14,12 +16,17 @@
     "node": "0.12.2"
   },
   "dependencies": {
-    "config": "^1.29.4",
-    "cors": "^2.8.4",
-    "express": "^4.16.2",
-    "mongodb": "^3.0.2",
-    "rxjs": "^5.5.6",
-    "winston": "^2.4.0",
-    "hoek": "~>5.0.3"
+    "bson": "~3.0.2",
+    "config": "~3.1.0",
+    "cors": "~2.8.5",
+    "express": "~4.17.1",
+    "hoek": "~6.1.3",
+    "json-server": "~0.14 .2",
+    "kerberos": "~1.1.2",
+    "mongodb": "~3.2.6",
+    "mongodb-core": "~3.2.6",
+    "node-gyp": "~3.8.0",
+    "rxjs": "~6.5.2",
+    "winston": "~3.2.1"
   }
 }
